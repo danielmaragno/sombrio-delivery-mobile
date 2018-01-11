@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 import { View, Alert, KeyboardAvoidingView } from 'react-native';
 import { Header, FormLabel, FormInput, Button, Avatar, Card } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { colorsTable, headerStyle,headerTitleStyle, viewStyle } from '../colors';
-import { changeId, changePasswd, changePasswdConf, changeName } from '../actions/registerActions';
+
+import { 
+	changeId, changePasswd, changePasswdConf, changeName, 
+	execRegister, 
+	resetPasswd 
+} from '../actions/registerActions';
 
 class Register extends React.Component {
   
@@ -18,6 +24,65 @@ class Register extends React.Component {
     headerStyle: headerStyle,
     headerTitleStyle: headerTitleStyle,
     headerTintColor: headerTitleStyle.color
+  }
+
+  confirmPasswd() {
+  	const register = this.props.register;
+  	return (
+		register.passwd === register.passwdConf
+  	)
+  }
+
+
+  execRegister() {
+  	if(this.confirmPasswd()){
+  		const client = {
+  			id: this.props.register.id,
+  			passwd: this.props.register.passwd,
+  			name: this.props.register.name
+  		}
+  		this.props.dispatch(execRegister(client));
+
+  	}
+  	else{
+  		this.showAlertConfirmPasswdError();
+  		this.props.dispatch(resetPasswd());
+  	}
+
+  }
+
+  //
+  // After update
+  //
+
+  componentDidUpdate(nextProps){
+    if(this.props.register.errorFlag) {
+    	this.showAlertDuplicateId()
+    	this.props.dispatch({type: 'REGISTER_RESET_FLAGS'})
+    }
+    else if(this.props.register.okFlag) {
+    	AsyncStorage.removeItem('token');
+    	this.props.dispatch({type: 'REGISTER_RESET_FLAGS'});
+    	this.props.dispatch({type: 'CHANGE_ID', payload: {id: this.props.register.id}});
+    	this.props.navigation.goBack();
+    }
+  } 
+  
+  //
+  // Alerts
+  //
+
+  showAlertConfirmPasswdError() {
+  	Alert.alert(
+		'Erro',
+		'Confirmação de senha.'
+  	)
+  }
+  showAlertDuplicateId() {
+  	Alert.alert(
+		'Erro',
+		'O Email informado já existe em nossos registros. Por favor, entre em contato conosco.'
+  	)
   }
 
   render() {
@@ -70,6 +135,7 @@ class Register extends React.Component {
 	     			raised
 	     			title='REGISTRAR'
 	     			loading={this.props.register.isLoading}
+	     			onPress={this.execRegister.bind(this)}
 	     		/>
 			</Card>
 
@@ -89,7 +155,8 @@ class Register extends React.Component {
 
 const mapStateProps = state => {
 	return {
-		register: state.register
+		register: state.register,
+		login: state.login
 	}
 }
 

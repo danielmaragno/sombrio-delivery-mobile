@@ -24,7 +24,6 @@ export function execLogin(info) {
 		request('/auth/login', 'POST', {info: info})
 		.then((response) => {
 			const responseBody = JSON.parse(response._bodyText)
-			console.log(responseBody);
 			
 			// Set token and Item in permanent Storage.
 			AsyncStorage.setItem("token", responseBody.token);

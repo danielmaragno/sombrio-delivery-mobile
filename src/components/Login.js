@@ -20,6 +20,10 @@ class Login extends React.Component {
     headerTitleStyle: headerTitleStyle
   }
 
+  async _checkAyncStorageToken() {
+    const token = await AsyncStorage.getItem('token');
+  }
+
   execLogin() {
   	const info = {
   		scope: 'client',
@@ -47,7 +51,7 @@ class Login extends React.Component {
 
   async _checkToken() {
     const token = await AsyncStorage.getItem('token');
-    console.log(token);
+    // console.log(token);
   }
 
   goToRegister() {
