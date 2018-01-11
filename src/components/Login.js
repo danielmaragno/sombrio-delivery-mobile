@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
 import { View, Alert } from 'react-native'
 import { Header, FormLabel, FormInput, Button, Avatar, Card } from 'react-native-elements'
-import { primary } from '../colors';
+import { colorsTable, headerStyle, headerTitleStyle, viewStyle } from '../colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { changeId, changePasswd, execLogin, clearPasswdField } from '../actions/loginActions';
@@ -15,7 +15,9 @@ class Login extends React.Component {
   }
 
   static navigationOptions = {
-    header: null
+    title: 'Sombrio Delivery',
+    headerStyle: headerStyle,
+    headerTitleStyle: headerTitleStyle
   }
 
   execLogin() {
@@ -65,12 +67,14 @@ class Login extends React.Component {
     return (
 
       <KeyboardAwareScrollView>
-    	<View style={{flex:1}}>
-    		<Header
-    			leftComponent={{icon: 'home', color: 'white'}}
-    			centerComponent={{text: 'Sombrio Delivery', style: {color: 'white'} }}
-    			rightComponents={{}}
-    		/>
+    	<View style={viewStyle}>
+    		{/*
+        <Header
+          leftComponent={{icon: 'home', color: 'white'}}
+          centerComponent={{text: 'Sombrio Delivery', style: {color: 'white'} }}
+          rightComponents={{}}
+        />
+        */}
     		
     		<Card title="Entrar"> 
 	    		<FormLabel>Email</FormLabel>
@@ -90,7 +94,7 @@ class Login extends React.Component {
 
 	     		<Button
 	     			onPress={this.execLogin.bind(this)}
-	     			backgroundColor={primary}
+	     			backgroundColor={colorsTable.primary}
 	     			raised
 	     			title='ENTRAR'
 	     			loading={this.props.login.isLoading}

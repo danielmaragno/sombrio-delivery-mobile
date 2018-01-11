@@ -1,2 +1,24 @@
 
-export const primary = "#3f51b5";
+export const headerStyle = {
+	// backgroundColor: '#2F363D', // mais escuro
+	backgroundColor: '#1A64AE'
+}
+
+export const headerTitleStyle = { 
+	color: '#ffffff',
+	fontWeight: 'normal',
+	// fontFamily: 'Times New Roman'
+
+}
+
+export const viewStyle = {
+	flex: 1,
+	// backgroundColor: "#A4A9AE", // mais escuro
+	backgroundColor: '#B0C7DE'
+}
+
+// export const primary = "#3f51b5";
+
+export const colorsTable = {
+	primary: '#3366CC'
+}
