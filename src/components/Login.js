@@ -49,6 +49,13 @@ class Login extends React.Component {
   	this.props.dispatch(clearPasswdField())
   }
 
+  showAlertRegisterOk() {
+    Alert.alert(
+      'Confirmado',
+      'Seu cadastro foi confirmado com sucesso. Por favor, faça o login.'
+    )
+  }
+
   async _checkToken() {
     const token = await AsyncStorage.getItem('token');
     // console.log(token);
@@ -60,9 +67,11 @@ class Login extends React.Component {
 
   componentDidUpdate(nextProps){
     if(this.props.login.errorFlag){
-      this.showAlert()
+      this.showAlert();
     }
-    // navigate to Home Page
+    if(this.props.register.okFlag){
+      this.showAlertRegisterOk();
+    }
   } 
 
 
@@ -121,7 +130,8 @@ class Login extends React.Component {
 
 const mapStateProps = state => {
 	return {
-		login: state.login
+		login: state.login,
+    register: state.register
 	}
 }
 

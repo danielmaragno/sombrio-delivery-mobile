@@ -1,6 +1,7 @@
 const initialState = {
 	id: 'daniel',
 	passwd: 'gremiofbpa',
+	
 	token: null,
 	isLoading: false,
 	errorFlag: false

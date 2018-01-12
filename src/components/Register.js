@@ -62,8 +62,13 @@ class Register extends React.Component {
     }
     else if(this.props.register.okFlag) {
     	AsyncStorage.removeItem('token');
+    	// Clear SENHA field
+    	this.props.dispatch({type: 'LOGIN_CLEAR_PASSWD_FIELD'});
+    	// Reset flags 
     	this.props.dispatch({type: 'REGISTER_RESET_FLAGS'});
+    	// Change ID to appear in Login Page
     	this.props.dispatch({type: 'CHANGE_ID', payload: {id: this.props.register.id}});
+    	// Go back to login page
     	this.props.navigation.goBack();
     }
   } 
