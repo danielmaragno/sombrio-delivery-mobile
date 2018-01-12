@@ -13,6 +13,7 @@ export const headerTitleStyle = {
 
 export const viewStyle = {
 	flex: 1,
+	paddingBottom: 15,
 	// backgroundColor: "#A4A9AE", // mais escuro
 	backgroundColor: '#B0C7DE'
 }
