@@ -23,3 +23,21 @@ export const viewStyle = {
 export const colorsTable = {
 	primary: '#3366CC'
 }
+
+export const drawerMenuHeaderView = {
+	padding: 13,
+	backgroundColor: 'grey'
+}
+
+export const drawerMenuHeaderTitle = {
+	fontSize: 20,
+    fontWeight: 'bold',
+}
+
+export const drawerMenuHeaderSubTitle = {
+	
+}
+
+export const drawerListItems = {
+	borderBottomWidth: 0
+}

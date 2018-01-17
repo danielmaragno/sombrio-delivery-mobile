@@ -1,5 +1,6 @@
 import { request } from '../http_config';
 import { AsyncStorage } from 'react-native';
+import RNRestart from 'react-native-restart';
 
 export function changeId(id) {
 	return {
@@ -35,6 +36,7 @@ export function execLogin(info) {
 					token: responseBody.token
 				}
 			})
+			RNRestart.Restart();
 		})
 		.catch((error) => {
 			console.log(error);

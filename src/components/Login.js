@@ -12,6 +12,7 @@ class Login extends React.Component {
   
   constructor(props) {
     super(props);
+    // this.props.navigation.setOnNavigatorEvent(this._checkAyncStorageToken.bind(this));
   }
 
   static navigationOptions = {
@@ -22,6 +23,9 @@ class Login extends React.Component {
 
   async _checkAyncStorageToken() {
     const token = await AsyncStorage.getItem('token');
+    if(token){
+      this.props.navigation.navigate('Home');
+    }
   }
 
   execLogin() {
@@ -75,7 +79,8 @@ class Login extends React.Component {
   } 
 
 
-  render() {	
+  render() {
+    // this._checkAyncStorageToken();
   	
     return (
 
