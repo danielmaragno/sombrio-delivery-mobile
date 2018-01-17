@@ -26,7 +26,7 @@ export const colorsTable = {
 
 export const drawerMenuHeaderView = {
 	padding: 13,
-	backgroundColor: 'grey'
+	// backgroundColor: 'grey'
 }
 
 export const drawerMenuHeaderTitle = {

@@ -3,9 +3,11 @@ import { reducer as formReducer } from 'redux-form';
 
 import login from './loginReducer';
 import register from './registerReducer';
+import user from './userReducer';
 
 export default combineReducers({
 	form: formReducer,
 	login,
-	register
+	register,
+	user
 });

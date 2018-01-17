@@ -1,13 +1,12 @@
 import React from 'react';
 import { StackNavigator, DrawerNavigator } from "react-navigation";
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native'
-
-import store from './store';
 
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import Chart from './components/Chart';
 
 const LoginNavigator = StackNavigator(
 	{
@@ -22,8 +21,10 @@ import routesList from './routes';
 import DrawerMenu from './components/DrawerMenu';
 
 let routes = {};
+
 for(i in routesList)
   routes[routesList[i].key] = {screen: routesList[i].screen}
+routes['Chart'] = {screen: Chart}
 
 const AppNavigator = DrawerNavigator(
   routes,
@@ -37,7 +38,7 @@ const AppNavigator = DrawerNavigator(
 
 let Navigator = LoginNavigator;
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,7 +49,9 @@ export default class App extends React.Component {
 
   async _checkToken() {
     const token = await AsyncStorage.getItem('token');
-    this.setState({token: token})
+    this.props.dispatch({type: 'FETCH_TOKEN', token: token})
+    const id = await AsyncStorage.getItem('id');
+    this.props.dispatch({type: 'FETCH_ID', id: id})
   }
 
   componentWillMount() {
@@ -56,14 +59,25 @@ export default class App extends React.Component {
   }
 
   render() {
-    if(this.state.token){
+    
+    if(this.props.user.token){
       Navigator = AppNavigator;
     }
 
     return (
-      <Provider store={store}>
-      	<Navigator />
-      </Provider>
+      <Navigator />
     );
   }
 }
+
+
+const mapStateProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(
+  mapStateProps,
+  null
+)(App)
