@@ -8,7 +8,7 @@ const Header = ({title, navigate}) => {
     	outerContainerStyles={{ borderBottomWidth:0 }}
     	leftComponent={{ icon: 'menu', color: headerTitleStyle.color, onPress: () => navigate('DrawerOpen') }}
 		centerComponent={{ text: title, style: { color: '#fff' } }}
-		rightComponent={{ icon: 'shopping-cart', color: headerTitleStyle.color, onPress: () => navigate('Chart') }}
+		rightComponent={{ icon: 'shopping-cart', color: headerTitleStyle.color, onPress: () => navigate('Cart') }}
 	/>
   )
 }

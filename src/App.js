@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native'
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import Chart from './components/Chart';
+import Cart from './components/Cart';
 
 const LoginNavigator = StackNavigator(
 	{
@@ -24,7 +24,7 @@ let routes = {};
 
 for(i in routesList)
   routes[routesList[i].key] = {screen: routesList[i].screen}
-routes['Chart'] = {screen: Chart}
+routes['Cart'] = {screen: Cart}
 
 const AppNavigator = DrawerNavigator(
   routes,

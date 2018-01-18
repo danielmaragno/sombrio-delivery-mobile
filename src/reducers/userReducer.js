@@ -2,7 +2,9 @@ const initialState = {
 	token: null,
 	id: null,
 	name: null,
-	address: null
+	address: null,
+
+	isLoadingLogout: false
 }
 
 export default function reducer(state=initialState, action){

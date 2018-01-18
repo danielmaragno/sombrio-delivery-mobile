@@ -5,7 +5,7 @@ import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { Divider, List, ListItem } from 'react-native-elements';
 import { drawerMenuHeaderView, drawerMenuHeaderTitle, drawerListItems } from '../colors';
 
-import { fetchUser } from '../actions/userActions';
+import { fetchUser, logout } from '../actions/userActions';
 
 import routesList from '../routes';
 
@@ -18,10 +18,15 @@ class DrawerMenu extends React.Component {
 		this.props.dispatch(fetchUser(token));
 	}
 	
+	logout(){
+		const token = this.props.user.token;
+		this.props.dispatch(logout(token))
+	}
+
 	render(){
 
 		const { navigate } = this.props.navigation;
-		const { id, name } = this.props.user;
+		const { id, name, isLoadingLogout } = this.props.user;
 		
 		return (
 			<ScrollView>
@@ -49,6 +54,7 @@ class DrawerMenu extends React.Component {
 							key="logout"
 							title="Sair"
 							leftIcon={{name:"power-settings-new"}}
+							onPress={this.logout.bind(this)}
 						/>
 					</List>
 			    </SafeAreaView>

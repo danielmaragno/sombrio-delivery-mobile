@@ -1,13 +1,14 @@
 
 import Home from './components/Home';
+import HomePos from './components/HomePos';
 import Orders from './components/Orders';
 import Address from './components/Address';
 
 const routesList = [
 	{
-		key: 'Home',
-		screen: Home,
-		routeName: 'Home',
+		key: 'HomePos',
+		screen: HomePos,
+		routeName: 'HomePos',
 		params: {
 			title: "Início",
 			leftIcon: {

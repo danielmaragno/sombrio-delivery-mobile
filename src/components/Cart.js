@@ -3,7 +3,7 @@ import { View, Alert, KeyboardAvoidingView, Text } from 'react-native';
 import { viewStyle } from '../colors';
 import Header from './Header';
 
-export default class Chart extends React.Component {
+export default class Cart extends React.Component {
 	
 	constructor(props) {
 		super(props);

@@ -1,4 +1,6 @@
 import { request, request_get } from '../http_config';
+import { AsyncStorage } from 'react-native';
+import RNRestart from 'react-native-restart';
 
 export function fetchUser(token) {
 	return (dispatch) => {
@@ -7,13 +9,33 @@ export function fetchUser(token) {
 		.then((response) => {
 			if(response.status === 200){
 				const responseBody = JSON.parse(response._bodyText);
-				console.log(responseBody)
+				// console.log(responseBody)
 				dispatch({
 					type: 'FETCH_USER',
 					id: responseBody.id,
 					name: responseBody.name,
 					address: responseBody.address
 				})
+			}
+			else{
+				console.log(response);
+			}
+		})
+		
+		.catch((error) => {
+			console.log(error);
+		})
+	}
+}
+
+export function logout(token) {
+	return (dispatch) => {
+		request_get('/auth/logout', token)
+		
+		.then((response) => {
+			if(response.status === 200){
+				AsyncStorage.removeItem('token');
+				RNRestart.Restart();
 			}
 			else{
 				console.log(response);
