@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, Alert, KeyboardAvoidingView, Text } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, Badge } from 'react-native-elements';
+import { Col, Row, Grid } from "react-native-easy-grid";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { viewStyle } from '../colors';
+import { viewStyle, orderStatusMap } from '../colors';
 import Header from './Header';
+import { formatMonetary, formatDateTime } from '../utils';
 
 import { fetchOrders } from '../actions/ordersActions';
 
@@ -29,7 +31,31 @@ class Orders extends React.Component {
 					<View>
 						{
 							orders.map((o, i) => (
-								<Card title={`Pedido ${o._id.slice(-4)}`} key={o._id}>
+								<Card  key={o._id}>
+									<Grid>
+										<Row style={{height: 30}}>
+											<Text style={{fontWeight: 'bold', color: '#424242'}}>
+												{`#${o._id.slice(-4)}`}
+											</Text>
+											<Badge 
+												containerStyle={{backgroundColor: orderStatusMap[o.status].color}}
+												wrapperStyle={{	position: 'absolute', right: 0}}
+											>
+												<Text style={{color:'white', fontSize: 12}}>
+													{orderStatusMap[o.status].title}
+												</Text>
+											</Badge>
+										</Row>
+										<Row>
+											<Text style={{fontSize: 16}}>
+												{`R$ ${formatMonetary(o.total_price)}`}
+											</Text>
+											<Text style={{	position: 'absolute', right: 0, bottom:0}}>
+												{formatDateTime(o.timeStamp)}
+											</Text>
+										</Row>
+									</Grid>
+										
 									
 								</Card>
 							))

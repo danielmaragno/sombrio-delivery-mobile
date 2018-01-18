@@ -41,3 +41,26 @@ export const drawerMenuHeaderSubTitle = {
 export const drawerListItems = {
 	borderBottomWidth: 0
 }
+
+export const orderStatusMap = {
+    requested: {
+    	title: 'Pendente',
+    	color: '#f1c40f'
+    },
+    confirmed: {
+    	title: 'Confirmado',
+    	color: '#27ae60'
+    },
+    canceled: {
+    	title: 'Cancelado',
+    	color: '#e74c3c'
+    },
+    on_road: {
+    	title: 'Saiu para Entrega',
+    	color: '#2980b9'
+    },
+    done: {
+    	title: 'Finalizado',
+    	color: '#2c3e50'
+    }
+}
