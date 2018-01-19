@@ -52,7 +52,7 @@ export function updateAddress(token, address){
 	return (dispatch) => {
 		dispatch({type: 'LOADING_ADDRESS_UPDATE_TRUE'})
 
-		request('/client', 'PUT', {requested_data: {address: address}}, token)
+		request('/client', 'PUT', {required_data: {address: address}}, token)
 
 		.then((response) => {
 			dispatch({type: 'LOADING_ADDRESS_UPDATE_FALSE'})

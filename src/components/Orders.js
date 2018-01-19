@@ -28,6 +28,11 @@ class Orders extends React.Component {
 			<View style={viewStyle} >
 				<Header title="Meus Pedidos"  navigate={this.props.navigation.navigate} />
 				<KeyboardAwareScrollView>
+					<Card containerStyle={orders.lenght ? {display: "none"} : {}}>
+						<Text style={{textAlign: 'center', fontWeight: 'bold', color: '#444'}}>
+							Você ainda não fez pedidos!
+						</Text>
+					</Card>
 					<View>
 						{
 							orders.map((o, i) => (

@@ -27,6 +27,9 @@ export default function reducer(state=initialState, action){
 			return initialState
 		}
 		
+		case 'UPDATE_USER_ADDRESS': {
+			return {...state, address: action.address}
+		}
 		case 'LOADING_ADDRESS_UPDATE_TRUE': {
 			return {...state, isLoadingAddressUpdate: true}
 		}
