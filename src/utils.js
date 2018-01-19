@@ -5,5 +5,5 @@ export function formatMonetary(price){
 }
 
 export function formatDateTime(date){
-	return Moment(date).format('HH:mm DD/MM');
+	return Moment(date).format('DD/MM/YYYY HH:mm');
 }

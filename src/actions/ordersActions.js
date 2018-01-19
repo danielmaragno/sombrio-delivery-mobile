@@ -10,7 +10,7 @@ export function fetchOrders(pos_id, token){
 		.then((response) => {
 			if(response.status === 200){
 				const responseBody = JSON.parse(response._bodyText);
-				console.log(responseBody);
+				// console.log(responseBody);
 				dispatch({type: 'FETCH_ORDERS', orders: responseBody})
 			}
 			else {
@@ -22,6 +22,4 @@ export function fetchOrders(pos_id, token){
 			console.log(error);
 		})
 	}
-
-
 }

@@ -47,3 +47,27 @@ export function logout(token) {
 		})
 	}
 }
+
+export function updateAddress(token, address){
+	return (dispatch) => {
+		dispatch({type: 'LOADING_ADDRESS_UPDATE_TRUE'})
+
+		request('/client', 'PUT', {requested_data: {address: address}}, token)
+
+		.then((response) => {
+			dispatch({type: 'LOADING_ADDRESS_UPDATE_FALSE'})
+			
+			if(response.status === 200){
+				dispatch({type: 'ADDRESS_UPDATE_TRUE'})
+			}
+			else {
+				console.log(response)
+			}
+		})
+
+		.catch((error) => {
+			dispatch({type: 'LOADING_ADDRESS_UPDATE_FALSE'})
+			console.log(error);
+		})
+	}
+}
