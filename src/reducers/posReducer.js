@@ -2,7 +2,8 @@ const initialState = {
 	id: 'pao_mel',
 	name: null,
 	image: null,
-	deliveryPrice: null
+	deliveryPrice: null,
+	items: []
 }
 
 export default function reducer(state=initialState, action){
@@ -15,6 +16,9 @@ export default function reducer(state=initialState, action){
 				image: action.pos.image,
 				deliveryPrice: action.pos.deliveryPrice
 			}
+		}
+		case 'FETCH_ITEMS': {
+			return {...state, items: action.items}
 		}
 	}
 

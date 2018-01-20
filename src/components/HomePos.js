@@ -4,7 +4,7 @@ import { View, Alert, KeyboardAvoidingView, Text } from 'react-native';
 import { colorsTable, headerStyle,headerTitleStyle, viewStyle } from '../colors';
 import Header from './Header'
 
-import { fetchPos } from '../actions/posActions';
+import { fetchPos, fetchItems } from '../actions/posActions';
 
 class HomePos extends React.Component {
 	
@@ -13,7 +13,9 @@ class HomePos extends React.Component {
 
 		const token  = this.props.user.token;
 		const pos_id = this.props.pos.id; 
-		this.props.dispatch(fetchPos(pos_id, token))
+		this.props.dispatch(fetchPos(pos_id, token));
+		this.props.dispatch(fetchItems(pos_id, token));
+		
 	}
 
 	static navigationOptions = {
