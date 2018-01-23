@@ -6,6 +6,7 @@ import register from './registerReducer';
 import user from './userReducer';
 import pos from './posReducer';
 import orders from './ordersReducer';
+import itemModal from './itemModalReducer';
 
 export default combineReducers({
 	form: formReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
 	register,
 	user,
 	pos,
-	orders
+	orders,
+	itemModal
 });

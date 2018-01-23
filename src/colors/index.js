@@ -15,7 +15,7 @@ export const viewStyle = {
 	flex: 1,
 	paddingBottom: 15,
 	// backgroundColor: "#A4A9AE", // mais escuro
-	backgroundColor: '#B0C7DE'
+	backgroundColor: '#B0C7DE' // azul claro
 }
 
 // export const primary = "#3f51b5";
