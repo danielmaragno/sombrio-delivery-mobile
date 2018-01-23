@@ -6,6 +6,8 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { formatMonetary, formatDateTime } from '../utils';
 import { headerStyle } from '../colors';
 
+import { addItemToCart } from '../actions/cartActions';
+
 class ItemModal extends React.Component {
 	
 
@@ -19,10 +21,24 @@ class ItemModal extends React.Component {
 		}
 	}
 
+	addItemToCart() {
+		const { onRequestClose, cart, itemModal } = this.props;
+		
+		onRequestClose();
+		
+		const item = {
+			_id: itemModal.item._id,
+			name: itemModal.item.name,
+			price_un: itemModal.item.price,
+			qtd: itemModal.qtd
+		}
+
+		this.props.dispatch(addItemToCart(item, cart));
+	}
+
 	render() {
 
 		const props = this.props;
-		console.log(this.props)
 		const { item, qtd } = this.props.itemModal;
 
 		return (
@@ -81,6 +97,7 @@ class ItemModal extends React.Component {
 							containerViewStyle={{width: '100%', marginLeft:0}}
 							backgroundColor={headerStyle.backgroundColor}
 							large
+							onPress={this.addItemToCart.bind(this)}
 						/>
 					</View>
 				</View>
@@ -91,7 +108,8 @@ class ItemModal extends React.Component {
 
 const mapStateProps = state => {
 	return {
-		itemModal: state.itemModal
+		itemModal: state.itemModal,
+		cart: state.cart
 	}
 }
 
