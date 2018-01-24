@@ -1,28 +1,29 @@
+export const colorsTable = {
+	// primary: '#3366CC'
+    primary: "#27ae60"
+}
 
 export const headerStyle = {
-	// backgroundColor: '#2F363D', // mais escuro
-	backgroundColor: '#1A64AE'
+    // backgroundColor: '#2F363D', // mais escuro
+    // backgroundColor: '#1A64AE' // Azul
+    backgroundColor: colorsTable.primary
 }
 
 export const headerTitleStyle = { 
-	color: '#ffffff',
-	fontWeight: 'normal',
-	// fontFamily: 'Times New Roman'
+    color: '#ffffff',
+    fontWeight: 'normal',
+    // fontFamily: 'Times New Roman'
 
 }
 
 export const viewStyle = {
-	flex: 1,
-	paddingBottom: 15,
-	// backgroundColor: "#A4A9AE", // mais escuro
-	backgroundColor: '#B0C7DE' // azul claro
+    flex: 1,
+    paddingBottom: 15,
+    // backgroundColor: "#A4A9AE", // mais escuro
+    // backgroundColor: '#B0C7DE' // azul claro
+    backgroundColor: '#f0ead6' // marrom bem claro
 }
 
-// export const primary = "#3f51b5";
-
-export const colorsTable = {
-	primary: '#3366CC'
-}
 
 export const drawerMenuHeaderView = {
 	padding: 13,
@@ -63,4 +64,9 @@ export const orderStatusMap = {
     	title: 'Finalizado',
     	color: '#2c3e50'
     }
+}
+
+export const listItemStyle = {
+    backgroundColor: "#fff",
+    color: "#444"
 }

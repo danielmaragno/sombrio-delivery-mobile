@@ -4,8 +4,8 @@ import { ScrollView, View, Alert, KeyboardAvoidingView, Text, Image } from 'reac
 import { Divider, List, ListItem } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { colorsTable, headerStyle,headerTitleStyle, viewStyle } from '../colors';
 import Header from './Header';
+import { colorsTable, headerStyle,headerTitleStyle, viewStyle, listItemStyle } from '../colors';
 import { formatMonetary, formatDateTime } from '../utils';
 
 
@@ -78,7 +78,7 @@ class HomePos extends React.Component {
 const Item = ({item}) => {
 	
 	return (
-		<View>
+		<View style={{backgroundColor: listItemStyle.backgroundColor}}>
 			<Grid>
 				<Row>
 					<Col size={3}>
@@ -88,12 +88,12 @@ const Item = ({item}) => {
 						/>
 					</Col>
 					<Col size={6}>
-						<Text style={{color: style.item.color}}>
+						<Text style={{color: listItemStyle.color}}>
 							{item.name}
 						</Text>
 					</Col>
 					<Col size={3}>
-						<Text style={{color: style.item.color, position: 'absolute', right: 0}}>
+						<Text style={{color: listItemStyle.color, position: 'absolute', right: 0}}>
 							{`R$ ${formatMonetary(item.price)}`}
 						</Text>
 					</Col>
@@ -102,13 +102,6 @@ const Item = ({item}) => {
 				
 		</View>
 	)
-}
-
-const style = {
-	item: {
-		color: '#444',
-		fontSize: 18
-	}
 }
 
 const mapStateProps = state => {

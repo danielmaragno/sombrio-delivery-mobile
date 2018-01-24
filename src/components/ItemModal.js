@@ -4,7 +4,7 @@ import { ScrollView, Modal, View, Text, Image } from 'react-native';
 import { Icon, Badge, Button } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { formatMonetary, formatDateTime } from '../utils';
-import { headerStyle } from '../colors';
+import { headerStyle, viewStyle } from '../colors';
 
 import { addItemToCart } from '../actions/cartActions';
 
@@ -47,7 +47,7 @@ class ItemModal extends React.Component {
 				onRequestClose={props.onRequestClose}
 				animationType={'slide'}
 			>
-				<View style={{flex: 1}}>
+				<View style={viewStyle}>
 					<View>
 						<Image 
 							source={{uri: 'http://www.makmassas.com.br/image/cache/data/loja/produtos/trufas/trufa-amarula/trufa-amarula-1024x1024.jpg'}}

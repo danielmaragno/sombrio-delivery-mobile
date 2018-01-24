@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, KeyboardAvoidingView, Text, ScrollView, Image } from 'react-native';
+import { View, Alert, KeyboardAvoidingView, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Card, Button, Divider, Icon } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Header from './Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { formatMonetary } from '../utils';
-import { viewStyle, headerStyle } from '../colors'
+import { viewStyle, headerStyle, listItemStyle } from '../colors'
 
 class Cart extends React.Component {
 	
@@ -16,6 +16,10 @@ class Cart extends React.Component {
 
 	setObservacao(observacao) {
 		this.props.dispatch({type: 'SET_OBSERVACAO', observacao: observacao})
+	}
+
+	turnCartEmpty(){
+		console.log('empty');
 	}
 
 	render() {
@@ -39,7 +43,7 @@ class Cart extends React.Component {
 					<ScrollView>
 						{
 							cart.items.map((item, index) => (
-								<View key={index}>
+								<View key={index} style={{backgroundColor: listItemStyle.backgroundColor}}>
 									<Grid>
 										<Col size={2}>
 											<Image 
@@ -50,7 +54,7 @@ class Cart extends React.Component {
 										<Col size={6}>
 											<Row>
 												<Text 
-													style={{fontWeight: 'bold', color: '#444'}}
+													style={{fontWeight: 'bold', color: listItemStyle.color}}
 													numberOfLines={1}
 													adjustsFontSizeToFit
 												>
@@ -58,10 +62,10 @@ class Cart extends React.Component {
 												</Text>
 											</Row>
 											<Row>
-												<Text style={{color: '#444'}}>
+												<Text style={{color: listItemStyle.color}}>
 													{`${item.qtd}x`}
 												</Text>
-												<Text style={{color: '#444', position: 'absolute', right: 0}}>
+												<Text style={{color: listItemStyle.color, position: 'absolute', right: 0}}>
 													{`R$ ${formatMonetary(item.price_un * item.qtd)}`}
 												</Text>
 											</Row>
@@ -79,13 +83,34 @@ class Cart extends React.Component {
 						}
 					</ScrollView>
 					
-					<View style={{position: 'absolute', bottom: 0, right: 0, left:0}}>
-						<Text style={{
-							margin: 10,
-							color: '#444', fontWeight: 'bold', fontSize: 18, textAlign: 'center'
-						}}>
-							{`Total R$ ${formatMonetary(cart.total_price)}`}
-						</Text>
+					<View>
+						<View style={{flexDirection: 'row'}}>
+							<View style={{width: "50%"}}>
+								<Text style={{
+									margin: 10,
+									color: '#444', fontWeight: 'bold', fontSize: 18
+								}}>
+									{`Total R$ ${formatMonetary(cart.total_price)}`}
+								</Text>
+							</View>
+							<View style={{width: '50%'}}>
+								{/*
+									<Button
+										containerViewStyle={{paddingTop: 1, paddingBottom: 1}} 
+										title="Esvaziar"
+									/>
+								*/}
+								<TouchableOpacity onPress={this.turnCartEmpty.bind(this)}>
+									<Text style={{
+										margin: 10, 
+										fontSize: 18, fontWeight: 'bold', color: "#e67e22", textAlign: 'right' 
+									}}>
+										Esvaziar
+									</Text>
+								</TouchableOpacity>
+								
+							</View>
+						</View>
 						<Button 
 							large
 							title="FECHAR PEDIDO"
