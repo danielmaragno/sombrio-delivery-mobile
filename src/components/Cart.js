@@ -19,7 +19,18 @@ class Cart extends React.Component {
 	}
 
 	turnCartEmpty(){
-		console.log('empty');
+		this.props.dispatch({type: 'TURN_CART_EMPTY'})
+	}
+
+	_showEmptyChartConfirm() {
+		Alert.alert(
+			"Atenção",
+			"Tem certeza que deseja esvaziar seu carrinho de compras?",
+			[
+				{text: 'Cancelar'},
+				{text: 'Sim', onPress: () => this.turnCartEmpty()}
+			]
+		)
 	}
 
 	render() {
@@ -43,7 +54,7 @@ class Cart extends React.Component {
 					<ScrollView>
 						{
 							cart.items.map((item, index) => (
-								<View key={index} style={{backgroundColor: listItemStyle.backgroundColor}}>
+								<View key={item._id} style={{backgroundColor: listItemStyle.backgroundColor}}>
 									<Grid>
 										<Col size={2}>
 											<Image 
@@ -100,7 +111,7 @@ class Cart extends React.Component {
 										title="Esvaziar"
 									/>
 								*/}
-								<TouchableOpacity onPress={this.turnCartEmpty.bind(this)}>
+								<TouchableOpacity onPress={() => this._showEmptyChartConfirm()}>
 									<Text style={{
 										margin: 10, 
 										fontSize: 18, fontWeight: 'bold', color: "#e67e22", textAlign: 'right' 
