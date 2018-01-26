@@ -5,8 +5,10 @@ import { Card, Button, Divider, Icon } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Header from './Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { formatMonetary } from '../utils';
-import { viewStyle, headerStyle, listItemStyle } from '../colors'
+import { formatMonetary, RandomString } from '../utils';
+import { viewStyle, headerStyle, listItemStyle } from '../colors';
+
+import { removeCartItem, calcTotalPrice } from '../actions/cartActions';
 
 class Cart extends React.Component {
 	
@@ -22,6 +24,11 @@ class Cart extends React.Component {
 		this.props.dispatch({type: 'TURN_CART_EMPTY'})
 	}
 
+	removeCartItem(index) {
+		const { cart } = this.props;
+		this.props.dispatch(removeCartItem(index, cart))
+	}
+
 	_showEmptyChartConfirm() {
 		Alert.alert(
 			"Atenção",
@@ -33,11 +40,22 @@ class Cart extends React.Component {
 		)
 	}
 
+	_showRemoveItemConfirm(item, index) {
+		Alert.alert(
+			"Atenção",
+			"Tem certeza que deseja remover "+item.qtd+" Un. de "+item.name+" do seu carrinho de compras?",
+			[
+				{text: "Cancelar"},
+				{text: "Sim", onPress: () => this.removeCartItem(index)}
+			]
+		)
+	}
+
 	render() {
 
 		const { cart } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
-		console.log(cart)
+		// console.log(cart)
 
 		return (
 			<View style={viewModifiedStyle} >
@@ -54,7 +72,7 @@ class Cart extends React.Component {
 					<ScrollView>
 						{
 							cart.items.map((item, index) => (
-								<View key={item._id} style={{backgroundColor: listItemStyle.backgroundColor}}>
+								<View key={index} style={{backgroundColor: listItemStyle.backgroundColor}}>
 									<Grid>
 										<Col size={2}>
 											<Image 
@@ -85,6 +103,7 @@ class Cart extends React.Component {
 											<Icon 
 												name='clear'
 												color='#A2A2A2'
+												onPress={() => this._showRemoveItemConfirm(item, index)}
 											/>
 										</Col>
 									</Grid>
@@ -101,7 +120,7 @@ class Cart extends React.Component {
 									margin: 10,
 									color: '#444', fontWeight: 'bold', fontSize: 18
 								}}>
-									{`Total R$ ${formatMonetary(cart.total_price)}`}
+									{`Total R$ ${formatMonetary(calcTotalPrice(cart))}`}
 								</Text>
 							</View>
 							<View style={{width: '50%'}}>

@@ -7,3 +7,7 @@ export function formatMonetary(price){
 export function formatDateTime(date){
 	return Moment(date).format('DD/MM/YYYY HH:mm');
 }
+
+export function randomString() {
+	return String(Math.random())
+}

@@ -73,7 +73,6 @@ const initialState = {
         //     "_id" : "5a398818c53e5967d74438ab"
         // }
     ],
-	total_price: 0,
 	observacao: ""
 }
 
@@ -81,7 +80,7 @@ export default function reducer(state=initialState, action){
 
 	switch(action.type){
 		case 'ADD_ITEM_TO_CART': {
-			return {...state, items: action.items, total_price: action.total_price}
+			return {...state, items: action.items}
 		}
 		case 'RESET_CART': {
 			return initialState
@@ -92,9 +91,14 @@ export default function reducer(state=initialState, action){
 		case 'TURN_CART_EMPTY': {
 			return {
 				...state, 
-				items: initialState.items, 
-				total_price: initialState.total_price,
+				items: [], 
 				observacao: initialState.observacao
+			}
+		}
+		case 'NEW_CART_ITEMS_ARRAY': {
+			return {
+				...state,
+				items: action.items
 			}
 		}
 	}
