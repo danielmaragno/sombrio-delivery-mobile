@@ -11,69 +11,10 @@ const initialState = {
             "price_un" : 500, 
             "qtd" : 4, 
             "_id" : "5a398818c53e5967d74438ab"
-        },
-        // {
-        //     "name" : "Pão de Mel com Chocolate", 
-        //     "price_un" : 450, 
-        //     "qtd" : 2, 
-        //     "_id" : "5a398818c53e5967d74438ac"
-        // }, 
-        // {
-        //     "name" : "Pão de mel com Doce de Leite", 
-        //     "price_un" : 500, 
-        //     "qtd" : 4, 
-        //     "_id" : "5a398818c53e5967d74438ab"
-        // },
-        // {
-        //     "name" : "Pão de Mel com Chocolate", 
-        //     "price_un" : 450, 
-        //     "qtd" : 2, 
-        //     "_id" : "5a398818c53e5967d74438ac"
-        // }, 
-        // {
-        //     "name" : "Pão de mel com Doce de Leite", 
-        //     "price_un" : 500, 
-        //     "qtd" : 4, 
-        //     "_id" : "5a398818c53e5967d74438ab"
-        // },
-        // {
-        //     "name" : "Pão de Mel com Chocolate", 
-        //     "price_un" : 450, 
-        //     "qtd" : 2, 
-        //     "_id" : "5a398818c53e5967d74438ac"
-        // }, 
-        // {
-        //     "name" : "Pão de mel com Doce de Leite", 
-        //     "price_un" : 500, 
-        //     "qtd" : 4, 
-        //     "_id" : "5a398818c53e5967d74438ab"
-        // },
-        // {
-        //     "name" : "Pão de Mel com Chocolate", 
-        //     "price_un" : 450, 
-        //     "qtd" : 2, 
-        //     "_id" : "5a398818c53e5967d74438ac"
-        // }, 
-        // {
-        //     "name" : "Pão de mel com Doce de Leite", 
-        //     "price_un" : 500, 
-        //     "qtd" : 4, 
-        //     "_id" : "5a398818c53e5967d74438ab"
-        // },
-        // {
-        //     "name" : "Pão de Mel com Chocolate", 
-        //     "price_un" : 450, 
-        //     "qtd" : 2, 
-        //     "_id" : "5a398818c53e5967d74438ac"
-        // }, 
-        // {
-        //     "name" : "Pão de mel com Doce de Leite", 
-        //     "price_un" : 500, 
-        //     "qtd" : 4, 
-        //     "_id" : "5a398818c53e5967d74438ab"
-        // }
+        }
     ],
-	observacao: ""
+	observacao: "",
+	formaPagamento: ""
 }
 
 export default function reducer(state=initialState, action){
@@ -100,6 +41,9 @@ export default function reducer(state=initialState, action){
 				...state,
 				items: action.items
 			}
+		}
+		case 'SET_CART_FORMA_PAGAMENTO': {
+			return {...state, formaPagamento: action.formaPagamento}
 		}
 	}
 

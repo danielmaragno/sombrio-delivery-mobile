@@ -6,7 +6,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Header from './Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { formatMonetary, RandomString } from '../utils';
-import { viewStyle, headerStyle, listItemStyle } from '../colors';
+import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
 
 import { removeCartItem, calcTotalPrice } from '../actions/cartActions';
 
@@ -55,8 +55,7 @@ class Cart extends React.Component {
 
 		const { cart } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
-		// console.log(cart)
-
+		
 		return (
 			<View style={viewModifiedStyle} >
 				<Header title="Carrinho"  navigate={this.props.navigation.navigate} />
@@ -133,7 +132,7 @@ class Cart extends React.Component {
 								<TouchableOpacity onPress={() => this._showEmptyChartConfirm()}>
 									<Text style={{
 										margin: 10, 
-										fontSize: 18, fontWeight: 'bold', color: "#e67e22", textAlign: 'right' 
+										fontSize: 18, fontWeight: 'bold', color: colorsTable.info, textAlign: 'right' 
 									}}>
 										Esvaziar
 									</Text>
@@ -145,7 +144,8 @@ class Cart extends React.Component {
 							large
 							title="FECHAR PEDIDO"
 							containerViewStyle={{width: '100%', marginLeft:0}}
-							backgroundColor={headerStyle.backgroundColor}
+							backgroundColor={colorsTable.primary}
+							onPress={() => {this.props.navigation.navigate('ExecOrder')}}
 						/>
 					</View>
 				</View>

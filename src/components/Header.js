@@ -29,10 +29,10 @@ class Header extends React.Component {
 
 const CartIcon = ({navigate, cart}) => {
 	return (
-		<TouchableOpacity onPress={() => navigate('Cart')}>
+		<TouchableOpacity onPress={() => navigate('Cart')} >
 			<IconBadge
 				MainElement={
-					<View style={{padding: 5}}>
+					<View style={{paddingLeft: 14}}>
 						<Icon 
 							name="shopping-cart"
 							color={headerTitleStyle.color}
@@ -45,7 +45,10 @@ const CartIcon = ({navigate, cart}) => {
 			    IconBadgeStyle={{
 			    	width:13,
 			    	height:13,
-			    	// top: 0,
+			    	position: 'absolute',
+			    	bottom:0,
+			    	left: 0,
+			    	top: 'auto',
 			    	// right: 0
 			    }}
 			    Hidden={!cart.items.length}

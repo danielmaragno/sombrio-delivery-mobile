@@ -1,6 +1,7 @@
 export const colorsTable = {
 	// primary: '#3366CC'
-    primary: "#27ae60"
+    primary: "#27ae60", // green
+    info: "#e67e22" //orange
 }
 
 export const headerStyle = {
