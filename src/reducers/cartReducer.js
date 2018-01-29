@@ -1,20 +1,23 @@
 const initialState = {
 	items: [
-        {
-            "name" : "Pão de Mel com Chocolate", 
-            "price_un" : 450, 
-            "qtd" : 2, 
-            "_id" : "5a398818c53e5967d74438ac"
-        }, 
-        {
-            "name" : "Pão de mel com Doce de Leite", 
-            "price_un" : 500, 
-            "qtd" : 4, 
-            "_id" : "5a398818c53e5967d74438ab"
-        }
+        // {
+        //     "name" : "Pão de Mel com Chocolate", 
+        //     "price_un" : 450, 
+        //     "qtd" : 2, 
+        //     "_id" : "5a398818c53e5967d74438ac"
+        // }, 
+        // {
+        //     "name" : "Pão de mel com Doce de Leite", 
+        //     "price_un" : 500, 
+        //     "qtd" : 4, 
+        //     "_id" : "5a398818c53e5967d74438ab"
+        // }
     ],
 	observacao: "",
-	formaPagamento: ""
+	formaPagamento: "",
+
+	execOrderLoading: false,
+	execOrderAlertSuccess: false
 }
 
 export default function reducer(state=initialState, action){
@@ -44,6 +47,12 @@ export default function reducer(state=initialState, action){
 		}
 		case 'SET_CART_FORMA_PAGAMENTO': {
 			return {...state, formaPagamento: action.formaPagamento}
+		}
+		case 'EXEC_ORDER_SET_LOADING': {
+			return {...state, execOrderLoading: action.loading}
+		}
+		case 'EXEC_ORDER_SET_ALERT_SUCCESS': {
+			return {...state, execOrderAlertSuccess: action.alert}
 		}
 	}
 

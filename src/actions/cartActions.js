@@ -1,3 +1,4 @@
+import { request } from '../http_config';
 
 export function addItemToCart(item, cart) {
 	cart.items.push(item);
@@ -23,4 +24,23 @@ export function calcTotalPrice(cart) {
 	}
 
 	return total_price;
+}
+
+export function execOrder(info, items_list, pos_id, token) {
+	return (dispatch) => {
+		dispatch({type: 'EXEC_ORDER_SET_LOADING', loading: true})
+
+		request('/pos/'+pos_id+'/order', 'POST', {order: info, items_list: items_list}, token)
+
+		.then((response) => {
+			if(response.status === 200){
+				dispatch({type: 'EXEC_ORDER_SET_LOADING', loading: false})
+				dispatch({type: 'EXEC_ORDER_SET_ALERT_SUCCESS', alert: true})
+			}
+			else {
+				console.log(response);
+				dispatch({type: 'EXEC_ORDER_SET_LOADING', loading: false})
+			}
+		})
+	}
 }

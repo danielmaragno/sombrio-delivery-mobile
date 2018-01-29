@@ -9,7 +9,7 @@ import FormaPagamento from './FormaPagamento';
 import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
 import { formatMonetary } from '../utils';
 
-import { calcTotalPrice } from '../actions/cartActions';
+import { calcTotalPrice, execOrder } from '../actions/cartActions';
 
 class ExecOrder extends React.Component {
 	
@@ -31,7 +31,14 @@ class ExecOrder extends React.Component {
 			this._missingFormaPagamentoAlert()
 			return;
 		}
-		console.log("FAZ PEDIDO");
+		
+		const info = {
+			formaPagamento: cart.formaPagamento,
+			observacao: cart.observacao,
+			items: cart.items
+		}
+		
+		this.props.dispatch(execOrder(info, cart.items, pos.id, user.token));
 	}
 
 	_missingAddressAlert() {
@@ -52,12 +59,25 @@ class ExecOrder extends React.Component {
 		)
 	}
 
+	_execOrderSuccessAlert() {
+		Alert.alert(
+			'Sucesso',
+			'Seu pedido foi enviado com sucesso'
+		)
+		this.props.dispatch({type: 'EXEC_ORDER_SET_ALERT_SUCCESS', alert: false})
+	}
+
+	componentDidUpdate() {
+		if(this.props.cart.execOrderAlertSuccess){
+			this._execOrderSuccessAlert();
+		}
+	}
+
 	render() {
 
 		const { pos, cart, user } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
-		console.log(pos);
-
+		
 		return (
 			<View style={viewModifiedStyle}>
 				<Header title="Pedido"  navigate={this.props.navigation.navigate} />
@@ -118,6 +138,7 @@ class ExecOrder extends React.Component {
 						containerViewStyle={{width: '100%', marginLeft:0}}
 						backgroundColor={colorsTable.primary}
 						onPress={() => this.execOrder()}
+						loading={cart.execOrderLoading}
 					/>
 				</View>
 			
