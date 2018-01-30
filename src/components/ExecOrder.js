@@ -64,7 +64,8 @@ class ExecOrder extends React.Component {
 			'Sucesso',
 			'Seu pedido foi enviado com sucesso'
 		)
-		this.props.dispatch({type: 'EXEC_ORDER_SET_ALERT_SUCCESS', alert: false})
+		this.props.dispatch({type: 'RESET_CART'})
+		this.props.navigation.navigate('Orders');
 	}
 
 	componentDidUpdate() {

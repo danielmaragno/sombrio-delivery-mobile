@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { View, Alert } from 'react-native'
+import { View, Alert, ScrollView, Text } from 'react-native'
 import { Header, FormLabel, FormInput, Button, Avatar, Card } from 'react-native-elements'
 import { colorsTable, headerStyle, headerTitleStyle, viewStyle } from '../colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -16,9 +16,10 @@ class Login extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Sombrio Delivery',
-    headerStyle: headerStyle,
-    headerTitleStyle: headerTitleStyle
+    // title: 'Sombrio Delivery',
+    // headerStyle: headerStyle,
+    // headerTitleStyle: headerTitleStyle,
+    header: null
   }
 
   async _checkAyncStorageToken() {
@@ -84,51 +85,58 @@ class Login extends React.Component {
   	
     return (
 
-      <KeyboardAwareScrollView>
+      
     	<View style={viewStyle}>
-    		{/*
+    		
         <Header
-          leftComponent={{icon: 'home', color: 'white'}}
-          centerComponent={{text: 'Sombrio Delivery', style: {color: 'white'} }}
+          outerContainerStyles={headerStyle}
+          leftComponent={{}}
+          centerComponent={<Text style={{color: '#fff', fontSize: 16}}>Sombrio Delivery</Text>}
           rightComponents={{}}
         />
-        */}
-    		
-    		<Card title="Entrar"> 
-	    		<FormLabel>Email</FormLabel>
-	    		<FormInput 
-					value={this.props.login.id}
-					onChangeText={(id) => this.changeId(id)}
-	    			keyboardType='email-address'
-	    			autoCapitalize='none'
-	    		/> 
-	    		<FormLabel>Senha</FormLabel>
-	    		<FormInput 
-					value={this.props.login.passwd}
-					onChangeText={(passwd) => this.changePasswd(passwd)} 
-	    			secureTextEntry={true}
-	    			autoCapitalize='none'
-	    		/> 
+        
+    		<ScrollView>
+          <View style={{marginBottom: 10}}>
 
-	     		<Button
-	     			onPress={this.execLogin.bind(this)}
-	     			backgroundColor={colorsTable.primary}
-	     			raised
-	     			title='ENTRAR'
-	     			loading={this.props.login.isLoading}
-	     		/>
-    		</Card>
+        		<Card title="Entrar"> 
+    	    		
+              <KeyboardAwareScrollView>
+                <FormLabel>Email</FormLabel>
+      	    		<FormInput 
+      					value={this.props.login.id}
+      					onChangeText={(id) => this.changeId(id)}
+      	    			keyboardType='email-address'
+      	    			autoCapitalize='none'
+      	    		/> 
+      	    		<FormLabel>Senha</FormLabel>
+      	    		<FormInput 
+      					value={this.props.login.passwd}
+      					onChangeText={(passwd) => this.changePasswd(passwd)} 
+      	    			secureTextEntry={true}
+      	    			autoCapitalize='none'
+      	    		/> 
+              </KeyboardAwareScrollView>
 
-			
-  			<Card title="Não possui cadastro?"> 
-  				<Button 
-  					title="REGISTRAR-SE"
-            onPress={this.goToRegister.bind(this)}
-  				/>
-  			</Card> 
+    	     		<Button
+    	     			onPress={this.execLogin.bind(this)}
+    	     			backgroundColor={colorsTable.primary}
+    	     			raised
+    	     			title='ENTRAR'
+    	     			loading={this.props.login.isLoading}
+    	     		/>
+        		</Card>
+
+    			
+      			<Card title="Não possui cadastro?"> 
+      				<Button 
+      					title="REGISTRAR-SE"
+                onPress={this.goToRegister.bind(this)}
+      				/>
+      			</Card>
+          </View>
+        </ScrollView>
 
      	</View>
-      </KeyboardAwareScrollView>
     );
   }
 }

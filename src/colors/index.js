@@ -19,7 +19,7 @@ export const headerTitleStyle = {
 
 export const viewStyle = {
     flex: 1,
-    paddingBottom: 15,
+    // paddingBottom: 15,
     // backgroundColor: "#A4A9AE", // mais escuro
     // backgroundColor: '#B0C7DE' // azul claro
     backgroundColor: '#f0ead6' // marrom bem claro

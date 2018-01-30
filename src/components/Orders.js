@@ -21,8 +21,9 @@ class Orders extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.orders);
+		
 		const { orders } = this.props.orders;
+		
 		return (
 				
 			<View style={viewStyle} >

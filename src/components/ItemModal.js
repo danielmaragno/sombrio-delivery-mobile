@@ -91,7 +91,7 @@ class ItemModal extends React.Component {
 							</Row>
 						</Grid>
 					</ScrollView>
-					<View style={{position: 'absolute', bottom:0, right:0, left:0}}>
+					<View>
 						<Button 
 							title="ADICIONAR AO CARRINHO"
 							containerViewStyle={{width: '100%', marginLeft:0}}

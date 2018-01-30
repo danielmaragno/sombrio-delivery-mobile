@@ -19,7 +19,7 @@ class Header extends React.Component {
 			<NativeHeader
 		    	outerContainerStyles={{ borderBottomWidth:0, backgroundColor: colorsTable.primary }}
 		    	leftComponent={{ icon: 'menu', color: headerTitleStyle.color, onPress: () => navigate('DrawerOpen') }}
-				centerComponent={{ text: title, style: { color: '#fff' } }}
+				centerComponent={<Text style={{color: '#fff', fontSize: 16}}>{title}</Text>}
 				rightComponent={<CartIcon navigate={navigate} cart={cart} />}
 			/>
 		);
