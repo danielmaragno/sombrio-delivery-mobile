@@ -26,9 +26,6 @@ export default function reducer(state=initialState, action){
 		case 'ADD_ITEM_TO_CART': {
 			return {...state, items: action.items}
 		}
-		case 'RESET_CART': {
-			return initialState
-		}
 		case 'SET_OBSERVACAO': {
 			return {...state, observacao: action.observacao}
 		}
@@ -36,7 +33,10 @@ export default function reducer(state=initialState, action){
 			return {
 				...state, 
 				items: [], 
-				observacao: initialState.observacao
+				observacao: initialState.observacao,
+				formaPagamento: "",
+				execOrderLoading: false,
+				execOrderAlertSuccess: false
 			}
 		}
 		case 'NEW_CART_ITEMS_ARRAY': {

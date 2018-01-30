@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, KeyboardAvoidingView, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Alert, KeyboardAvoidingView, Text, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native';
 import { Card, Button, Divider, Icon } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Header from './Header';
@@ -16,7 +16,7 @@ class Cart extends React.Component {
 		super(props);
 	}
 
-	setObservacao(observacao) {
+	changeObservacao(observacao) {
 		this.props.dispatch({type: 'SET_OBSERVACAO', observacao: observacao})
 	}
 
@@ -82,7 +82,7 @@ class Cart extends React.Component {
 										<Col size={6}>
 											<Row>
 												<Text 
-													style={{fontWeight: 'bold', color: listItemStyle.color}}
+													style={{fontWeight: 'bold', color: listItemStyle.color, fontSize: 16}}
 													numberOfLines={1}
 													adjustsFontSizeToFit
 												>
@@ -90,10 +90,10 @@ class Cart extends React.Component {
 												</Text>
 											</Row>
 											<Row>
-												<Text style={{color: listItemStyle.color}}>
+												<Text style={{color: listItemStyle.color, fontSize: 16}}>
 													{`${item.qtd}x`}
 												</Text>
-												<Text style={{color: listItemStyle.color, position: 'absolute', right: 0}}>
+												<Text style={{color: listItemStyle.color, fontSize: 16, position: 'absolute', right: 0}}>
 													{`R$ ${formatMonetary(item.price_un * item.qtd)}`}
 												</Text>
 											</Row>
@@ -113,6 +113,17 @@ class Cart extends React.Component {
 					</ScrollView>
 					
 					<View>
+						<View style={{padding: 10, marginTop: 3}}>
+							<KeyboardAwareScrollView>
+								<Text>Observação</Text>
+								<TextInput 
+									multiline={true}
+									numberOfLines={2}
+									value={cart.observacao}
+									onChangeText={(observacao) => this.changeObservacao(observacao)}
+								/>
+							</KeyboardAwareScrollView>
+						</View>
 						<View style={{flexDirection: 'row'}}>
 							<View style={{width: "50%"}}>
 								<Text style={{

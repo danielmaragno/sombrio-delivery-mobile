@@ -32,7 +32,7 @@ const routesList = [
 		screen: Address,
 		routeName: 'Address',
 		params: {
-			title: "Meu Endereço",
+			title: "Meu Endereço Padrão",
 			leftIcon: {
 				name: "location-on"
 			}

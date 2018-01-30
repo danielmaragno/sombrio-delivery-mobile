@@ -7,7 +7,7 @@ import { Card, Button, Divider, FormLabel } from 'react-native-elements';
 import Header from './Header';
 import FormaPagamento from './FormaPagamento';
 import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
-import { formatMonetary } from '../utils';
+import { formatMonetary, formatAddress } from '../utils';
 
 import { calcTotalPrice, execOrder } from '../actions/cartActions';
 
@@ -64,7 +64,7 @@ class ExecOrder extends React.Component {
 			'Sucesso',
 			'Seu pedido foi enviado com sucesso'
 		)
-		this.props.dispatch({type: 'RESET_CART'})
+		this.props.dispatch({type: 'TURN_CART_EMPTY'})
 		this.props.navigation.navigate('Orders');
 	}
 
@@ -83,38 +83,43 @@ class ExecOrder extends React.Component {
 			<View style={viewModifiedStyle}>
 				<Header title="Pedido"  navigate={this.props.navigation.navigate} />
 				
-				<ScrollView style={{paddingLeft: 10, paddingRight: 10}}>
-					
-
-					<View style={style.viewBlock}>
-						<Text style={style.viewBlockTitle}>Endereço de Entrega</Text>
-						<Text style={user.address ? style.viewBlockContent : {display: 'none'}}>
-							{user.address}
-						</Text>
-						<TouchableOpacity 
-							style={user.address ? {display: 'none'} : {} } 
-							onPress={() => this.props.navigation.navigate('Address')}
-						>
-							<Text style={{...style.viewBlockContent, color: 'red', fontWeight: 'bold'}}>
-								Clique aqui para informar o endereço de entrega!
+				<ScrollView>
+					<View style={{marginBottom: 10}}>
+						
+						<View style={style.viewBlock}>
+							<Text style={style.viewBlockTitle}>Endereço de Entrega</Text>
+							<Text style={user.address ? style.viewBlockContent : {display: 'none'}}>
+								{formatAddress(user.address)}
 							</Text>
-						</TouchableOpacity>
-					</View>
+							<TouchableOpacity 
+								style={user.address ? {display: 'none'} : {} } 
+								onPress={() => this.props.navigation.navigate('AddressNew')}
+							>
+								<Text style={{...style.viewBlockContent, color: 'red', fontWeight: 'bold'}}>
+									Clique aqui para informar o endereço de entrega!
+								</Text>
+							</TouchableOpacity>
+						</View>
 
-					<View style={style.viewBlock}>
-						<Text style={style.viewBlockTitle}>Forma de Pagamento</Text>
-						<FormaPagamento />
+						<View style={style.viewBlock}>
+							<Text style={style.viewBlockTitle}>Forma de Pagamento</Text>
+							<FormaPagamento />
+						</View>
+						
+						{/*
+						<Card>
+							<KeyboardAwareScrollView style={style.viewBlock}>
+								<Text style={style.viewBlockTitle}>Observação</Text>
+								<TextInput 
+									multiline={true}
+									numberOfLines={4}
+									value={cart.observacao}
+									onChangeText={(observacao) => this.changeObservacao(observacao)}
+								/>
+							</KeyboardAwareScrollView>
+						</Card>
+						*/}
 					</View>
-					
-					<KeyboardAwareScrollView style={style.viewBlock}>
-						<Text style={style.viewBlockTitle}>Observação</Text>
-						<TextInput 
-							multiline={true}
-							numberOfLines={4}
-							value={cart.observacao}
-							onChangeText={(observacao) => this.changeObservacao(observacao)}
-						/>
-					</KeyboardAwareScrollView>
 				</ScrollView>
 
 				<View>
@@ -150,7 +155,9 @@ class ExecOrder extends React.Component {
 
 const style = {
 	viewBlock: {
-		marginTop: 10
+		marginTop: 10,
+		padding: 10, 
+		backgroundColor: listItemStyle.backgroundColor
 	},
 	viewBlockTitle: {
 		// paddingLeft: 10, paddingRight: 10

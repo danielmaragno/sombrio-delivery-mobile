@@ -11,3 +11,17 @@ export function formatDateTime(date){
 export function randomString() {
 	return String(Math.random())
 }
+
+export function formatAddress(address) {
+	let formatedString = "";
+	
+	if(address){
+		const addressSplited = address.split(';');
+		for(let i in addressSplited){
+			if(addressSplited[i]){
+				formatedString += addressSplited[i]+'\n';
+			}
+		}
+	}
+	return formatedString;
+}

@@ -59,6 +59,7 @@ export function updateAddress(token, address){
 			
 			if(response.status === 200){
 				dispatch({type: 'ADDRESS_UPDATE_TRUE'})
+				dispatch({type: 'UPDATE_USER_ADDRESS', address: address})
 			}
 			else {
 				console.log(response)

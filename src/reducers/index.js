@@ -8,6 +8,7 @@ import pos from './posReducer';
 import orders from './ordersReducer';
 import itemModal from './itemModalReducer';
 import cart from './cartReducer';
+import address from './addressReducer';
 
 export default combineReducers({
 	form: formReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
 	pos,
 	orders,
 	itemModal,
-	cart
+	cart,
+	address
 });

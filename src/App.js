@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import ExecOrder from './components/ExecOrder';
+import AddressNew from './components/AddressNew';
 
 const LoginNavigator = StackNavigator(
 	{
@@ -27,6 +28,7 @@ for(i in routesList)
   routes[routesList[i].key] = {screen: routesList[i].screen}
 routes['Cart'] = {screen: Cart}
 routes['ExecOrder'] = {screen: ExecOrder}
+routes['AddressNew'] = {screen: AddressNew}
 
 const AppNavigator = DrawerNavigator(
   routes,

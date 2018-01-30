@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, KeyboardAvoidingView, Text } from 'react-native';
+import { View, Alert, ScrollView, Text } from 'react-native';
 import { Card, Badge } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { viewStyle, orderStatusMap } from '../colors';
 import Header from './Header';
 import { formatMonetary, formatDateTime } from '../utils';
@@ -28,13 +27,13 @@ class Orders extends React.Component {
 				
 			<View style={viewStyle} >
 				<Header title="Meus Pedidos"  navigate={this.props.navigation.navigate} />
-				<KeyboardAwareScrollView>
+				<ScrollView>
 					<Card containerStyle={orders.length ? {display: "none"} : {}}>
 						<Text style={{textAlign: 'center', fontWeight: 'bold', color: '#444'}}>
 							Você ainda não fez pedidos!
 						</Text>
 					</Card>
-					<View>
+					<View style={{marginBottom: 10}}>
 						{
 							orders.map((o, i) => (
 								<Card  key={o._id}>
@@ -67,7 +66,7 @@ class Orders extends React.Component {
 							))
 						}
 					</View>
-				</KeyboardAwareScrollView>
+				</ScrollView>
 			</View>
 		);
 	}
