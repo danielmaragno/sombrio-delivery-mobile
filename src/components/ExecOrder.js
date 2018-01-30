@@ -100,11 +100,12 @@ class ExecOrder extends React.Component {
 								</Text>
 							</TouchableOpacity>
 						</View>
-
+						
 						<View style={style.viewBlock}>
 							<Text style={style.viewBlockTitle}>Forma de Pagamento</Text>
 							<FormaPagamento />
 						</View>
+						
 						
 						{/*
 						<Card>
@@ -157,7 +158,7 @@ const style = {
 	viewBlock: {
 		marginTop: 10,
 		padding: 10, 
-		backgroundColor: listItemStyle.backgroundColor
+		// backgroundColor: listItemStyle.backgroundColor
 	},
 	viewBlockTitle: {
 		// paddingLeft: 10, paddingRight: 10
