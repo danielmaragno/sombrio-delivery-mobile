@@ -30,7 +30,7 @@ class AddressNew extends React.Component {
 		const { address } = this.props;
 		const { token } = this.props.user;
 		
-		const newAddress = address.cidade+";"+address.bairro+";"+address.rua+";"+address.complemento+";"+address.referencia;
+		const newAddress = address.cidade+", "+address.bairro+";"+address.rua+";"+address.complemento+";"+address.referencia;
 		
 		this.props.dispatch(updateAddress(token, newAddress));
 	}

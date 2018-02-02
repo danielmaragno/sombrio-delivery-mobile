@@ -23,5 +23,5 @@ export function formatAddress(address) {
 			}
 		}
 	}
-	return formatedString;
+	return formatedString.trim();
 }
