@@ -1,7 +1,10 @@
 import React from 'react';
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { connect } from 'react-redux';
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
+
+import { base_url } from './http_config';
+import { fetchOrders } from './actions/ordersActions';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -51,6 +54,17 @@ class App extends React.Component {
     this.state = {token: null}
     // Current dev screen for hot reload
     // this.props.navigation.navigate('Register');
+
+    // setInterval(() => this.fetchOrders(), 20000);
+
+  }
+
+  fetchOrders() {
+    const { token } = this.props.user;
+    if(token){
+      this.props.dispatch(fetchOrders(token));
+      console.log(this.props.orders.orders[0])
+    }
   }
 
   async _checkToken() {
@@ -68,6 +82,7 @@ class App extends React.Component {
     
     if(this.props.user.token){
       Navigator = AppNavigator;
+      // handleSocket(this.props.user.token);
     }
 
     return (
@@ -79,7 +94,8 @@ class App extends React.Component {
 
 const mapStateProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    orders: state.orders
   }
 }
 
@@ -87,3 +103,13 @@ export default connect(
   mapStateProps,
   null
 )(App)
+
+const handleSocket = (token) => {
+
+    const ws = new WebSocket('ws://'+base_url+'?token='+token);
+
+    ws.onmessage = (e) => {
+      console.log(e.data);
+      console.log(token);
+    }
+}

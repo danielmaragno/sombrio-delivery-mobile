@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { View, Alert, ScrollView, Text, Image } from 'react-native';
 import { Card, Divider, Icon, Badge } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -6,7 +7,7 @@ import { formatMonetary, formatDateTime } from '../utils';
 import { viewStyle, orderStatusMap, listItemStyle, colorsTable } from '../colors';
 import Header from './Header';
 
-export default class OrderExpand extends React.Component {
+class OrderExpand extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -14,7 +15,8 @@ export default class OrderExpand extends React.Component {
 
 	render() {
 
-		const order = this.props.navigation.state.params;
+		const { index } = this.props.navigation.state.params;
+		const order = this.props.orders.orders[index];
 		
 		return (
 			<View style={viewStyle}>
@@ -86,3 +88,15 @@ export default class OrderExpand extends React.Component {
 		);
 	}
 }
+
+
+const mapStateProps = state => {
+	return {
+		orders: state.orders,
+	}
+}
+
+export default connect(
+	mapStateProps,
+	null
+)(OrderExpand)

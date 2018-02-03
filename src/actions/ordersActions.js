@@ -1,11 +1,11 @@
 import { request, request_get } from '../http_config';
 
 
-export function fetchOrders(pos_id, token){
+export function fetchOrders(token){
 
 	return (dispatch) => {
 
-		request_get('/pos/'+pos_id+'/order', token)
+		request_get('/client/orders', token)
 
 		.then((response) => {
 			if(response.status === 200){

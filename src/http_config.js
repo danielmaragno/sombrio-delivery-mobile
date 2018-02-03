@@ -1,7 +1,9 @@
-const base_url = "http://192.168.0.108:3000"
+export const base_url = "192.168.0.108:3000"
+
+const http_url = "http://"+base_url
 
 export function request(url, method, body, token=null) {
-	return fetch( base_url+url,
+	return fetch( http_url+url,
 			{
 				method: method,
 				headers: {
@@ -15,7 +17,7 @@ export function request(url, method, body, token=null) {
 }
 
 export function request_get(url, token=null){
-	return fetch( base_url+url,
+	return fetch( http_url+url,
 			{
 				method: 'GET',
 				headers: {

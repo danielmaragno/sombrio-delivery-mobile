@@ -15,8 +15,7 @@ class Orders extends React.Component {
 		super(props);
 
 		const token  = this.props.user.token;
-		const pos_id = this.props.pos.id; 
-		this.props.dispatch(fetchOrders(pos_id, token))
+		this.props.dispatch(fetchOrders(token));
 	}
 
 	render() {
@@ -36,8 +35,8 @@ class Orders extends React.Component {
 					<View style={{marginBottom: 10}}>
 						{
 							orders.map((o, i) => (
-								<Card  key={o._id}>
-									<TouchableOpacity onPress={() => this.props.navigation.navigate('OrderExpand', o)}>
+								<Card  key={i}>
+									<TouchableOpacity onPress={() => this.props.navigation.navigate('OrderExpand', {index: i})}>
 										<Grid>
 											<Row style={{height: 30}}>
 												<Text style={{fontWeight: 'bold', color: '#424242'}}>
