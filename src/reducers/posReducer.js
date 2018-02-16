@@ -4,7 +4,8 @@ const initialState = {
 	image: null,
 	deliveryPrice: null,
 	formasPagamento: [],
-	items: []
+	items: [],
+	open: false
 }
 
 export default function reducer(state=initialState, action){
@@ -16,7 +17,8 @@ export default function reducer(state=initialState, action){
 				name: action.pos.name,
 				image: action.pos.image,
 				deliveryPrice: action.pos.deliveryPrice,
-				formasPagamento: action.pos.formasPagamento
+				formasPagamento: action.pos.formasPagamento,
+				open: action.pos.open
 			}
 		}
 		case 'FETCH_ITEMS': {

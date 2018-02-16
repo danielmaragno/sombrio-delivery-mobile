@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Modal, View, Text, Image } from 'react-native';
+import { ScrollView, Modal, View, Text, Image, TextInput } from 'react-native';
 import { Icon, Badge, Button } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { formatMonetary, formatDateTime } from '../utils';
 import { headerStyle, viewStyle } from '../colors';
+import { http_url } from '../http_config';
 
 import { addItemToCart } from '../actions/cartActions';
 
@@ -30,7 +32,9 @@ class ItemModal extends React.Component {
 			_id: itemModal.item._id,
 			name: itemModal.item.name,
 			price_un: itemModal.item.price,
-			qtd: itemModal.qtd
+			qtd: itemModal.qtd,
+			image: itemModal.item.image,
+			observacao: itemModal.observacao
 		}
 
 		this.props.dispatch(addItemToCart(item, cart));
@@ -39,7 +43,7 @@ class ItemModal extends React.Component {
 	render() {
 
 		const props = this.props;
-		const { item, qtd } = this.props.itemModal;
+		const { item, qtd, observacao } = this.props.itemModal;
 
 		return (
 			<Modal
@@ -48,13 +52,13 @@ class ItemModal extends React.Component {
 				animationType={'slide'}
 			>
 				<View style={viewStyle}>
-					<View>
-						<Image 
-							source={{uri: 'http://www.makmassas.com.br/image/cache/data/loja/produtos/trufas/trufa-amarula/trufa-amarula-1024x1024.jpg'}}
-							style={{width: "100%", height: 230}}
-						/>
-					</View>
 					<ScrollView>
+						<View>
+							<Image 
+								source={{uri: http_url+item.image}}
+								style={{width: "100%", height: 230}}
+							/>
+						</View>
 						<Grid style={{padding: 18}}>
 							<Row style={{marginTop: 18}}>
 								<Text style={{color: '#444', fontSize: 20, fontWeight: 'bold'}}>
@@ -88,6 +92,20 @@ class ItemModal extends React.Component {
 										</Col>
 									</Grid>
 								</Col>
+							</Row>
+							<Row style={{marginTop: 20}}>
+								<KeyboardAwareScrollView>
+									<Text>Observação</Text>
+									<TextInput 
+										multiline={true}
+										numberOfLines={2}
+										value={observacao}
+										onChangeText={(observacao) => {props.dispatch({
+											type: 'SET_ITEM_MODAL_OBSERVACAO',
+											observacao: observacao
+										})}}
+									/>
+								</KeyboardAwareScrollView>
 							</Row>
 						</Grid>
 					</ScrollView>

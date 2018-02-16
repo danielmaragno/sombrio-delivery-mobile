@@ -55,15 +55,22 @@ class App extends React.Component {
     // Current dev screen for hot reload
     // this.props.navigation.navigate('Register');
 
-    // setInterval(() => this.fetchOrders(), 20000);
+    setInterval(() => this.fetchOrders(), 15000);
 
   }
 
   fetchOrders() {
+    // First off all, check out for a token (User have to be logged in)
     const { token } = this.props.user;
     if(token){
-      this.props.dispatch(fetchOrders(token));
-      console.log(this.props.orders.orders[0])
+      // Alright, now lets check for a waiting order 
+      const { orders } = this.props.orders;
+      for(let i in orders){
+        if(['requested', 'confirmed', 'on_road'].indexOf(orders[i].status) >= 0){
+          this.props.dispatch(fetchOrders(token));
+          break;
+        }
+      }
     }
   }
 
@@ -72,15 +79,17 @@ class App extends React.Component {
     this.props.dispatch({type: 'FETCH_TOKEN', token: token})
     const id = await AsyncStorage.getItem('id');
     this.props.dispatch({type: 'FETCH_ID', id: id})
+    this.props.dispatch(fetchOrders(token));
   }
 
   componentWillMount() {
     this._checkToken();
+    
   }
 
   render() {
-    
-    if(this.props.user.token){
+    const { token } = this.props.user;
+    if(token){
       Navigator = AppNavigator;
       // handleSocket(this.props.user.token);
     }

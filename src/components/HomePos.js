@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, Alert, KeyboardAvoidingView, Text, Image } from 'react-native';
-import { Divider, List, ListItem } from 'react-native-elements';
+import { Divider, List, ListItem, Badge } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from './Header';
 import { colorsTable, headerStyle,headerTitleStyle, viewStyle, listItemStyle } from '../colors';
 import { formatMonetary, formatDateTime } from '../utils';
+import { http_url } from '../http_config';
 
 
 import ItemModal from './ItemModal';
@@ -40,30 +41,47 @@ class HomePos extends React.Component {
 
 	render() {
 
-		const { name, items } = this.props.pos;
+		const { name, items, open } = this.props.pos;
 		const { visible, item } = this.props.itemModal;
+		const openTagInfo = open ? {color: '#27ae60', text: 'ABERTO'} : {color: '#c0392b', text: 'FECHADO'}
 
 		return (
 			<View style={viewStyle}>
 				<Header title={name}  navigate={this.props.navigation.navigate} />
-				<ScrollView>
-					
-					<List>
+				<View style={{flexDirection: 'row', margin: 10}}>
+					<View style={{flex: 1, alignItems: 'flex-end'}}>
 						{
-							items.map((i, index) => (
-								<ListItem
-									onPress={() => this.openModal(i)}
-									key={i._id}
-									title={<Item item={i}/>}
-									
-									// hideChevron={true}
-
-								/>
-							))
+							
+							<Badge 
+								containerStyle={{backgroundColor: openTagInfo.color}}
+								textStyle={{color: '#fff'}}
+								value={openTagInfo.text}
+							/>
+								
+							
 						}
-					</List>
-				
-				</ScrollView>
+					</View>
+				</View>
+				<View>
+					<ScrollView>
+						
+						<List>
+							{
+								items.map((i, index) => (
+									<ListItem
+										onPress={() => this.openModal(i)}
+										key={i._id}
+										title={<Item item={i}/>}
+										
+										// hideChevron={true}
+
+									/>
+								))
+							}
+						</List>
+					
+					</ScrollView>
+				</View>
 				
 				<ItemModal 
 					visible={visible}
@@ -83,7 +101,7 @@ const Item = ({item}) => {
 				<Row>
 					<Col size={3}>
 						<Image 
-							source={{uri: 'http://www.makmassas.com.br/image/cache/data/loja/produtos/trufas/trufa-amarula/trufa-amarula-1024x1024.jpg'}}
+							source={{uri: http_url+item.image}}
 							style={{width: 60, height: 40}}
 						/>
 					</Col>

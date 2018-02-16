@@ -7,6 +7,7 @@ import Header from './Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { formatMonetary, RandomString } from '../utils';
 import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
+import { http_url } from '../http_config';
 
 import { removeCartItem, calcTotalPrice } from '../actions/cartActions';
 
@@ -55,6 +56,7 @@ class Cart extends React.Component {
 
 		const { cart } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
+		console.log(cart);
 		
 		return (
 			<View style={viewModifiedStyle} >
@@ -75,7 +77,7 @@ class Cart extends React.Component {
 									<Grid>
 										<Col size={2}>
 											<Image 
-												source={{uri: 'http://www.makmassas.com.br/image/cache/data/loja/produtos/trufas/trufa-amarula/trufa-amarula-1024x1024.jpg'}}
+												source={{uri: http_url+item.image}}
 												style={{width: 60, height: 40}}
 											/>
 										</Col>
@@ -89,6 +91,11 @@ class Cart extends React.Component {
 													{item.name}
 												</Text>
 											</Row>
+
+											<Row style={!item.observacao ? {display: 'none'} : {}}>
+												<Text>{item.observacao}</Text>
+											</Row>
+											
 											<Row>
 												<Text style={{color: listItemStyle.color, fontSize: 16}}>
 													{`${item.qtd}x`}
@@ -115,7 +122,7 @@ class Cart extends React.Component {
 					<View>
 						<View style={{padding: 10, marginTop: 3}}>
 							<KeyboardAwareScrollView>
-								<Text>Observação</Text>
+								<Text>Observações Gerais</Text>
 								<TextInput 
 									multiline={true}
 									numberOfLines={2}

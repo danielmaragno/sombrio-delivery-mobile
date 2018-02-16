@@ -106,7 +106,44 @@ class ExecOrder extends React.Component {
 							<FormaPagamento />
 						</View>
 						
-						
+						<View style={style.viewBlock}>
+							<Text style={style.viewBlockTitle}>Revise seu Pedido</Text>
+							{
+								cart.items.map((item, i) => (
+									<View key={i}>
+										<View style={{flexDirection: 'row'}}>
+											<View>
+												<Text style={style.viewBlockContent}>
+													{item.name}
+												</Text>
+											</View>
+											<View style={{flex:1, alignItems: 'flex-end'}}>
+												<Text style={style.viewBlockContent}>
+													{`${item.qtd}x`}
+												</Text>
+											</View>
+										</View>
+										<View style={!item.observacao ? {display: 'none'} : {}}>
+											<Text
+												style={{
+													paddingLeft: style.viewBlockContent.paddingLeft,
+													paddingRight: style.viewBlockContent.paddingRight
+												}}
+											>
+												{item.observacao}
+											</Text>
+										</View>
+									</View>
+								))
+							}
+						</View>
+
+						<View style={cart.observacao ? style.viewBlock : {display: 'none'} }>
+							<Text style={style.viewBlockTitle}>Observações Gerais</Text>
+							<Text style={style.viewBlockContent}>{cart.observacao}</Text>
+
+						</View>
+
 						{/*
 						<Card>
 							<KeyboardAwareScrollView style={style.viewBlock}>
@@ -166,7 +203,9 @@ const style = {
 	viewBlockContent: {
 		color: '#000',
 		fontSize: 16,
-		padding: 10
+		paddingLeft: 10,
+		paddingRight: 10,
+		marginTop: 10
 	}
 }
 
