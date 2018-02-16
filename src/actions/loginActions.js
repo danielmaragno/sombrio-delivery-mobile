@@ -17,7 +17,6 @@ export function changePasswd(passwd) {
 }
 
 export function execLogin(info) {
-	console.log(info);
 	
 	return (dispatch) => {
 		dispatch({type: "EXEC_LOGIN", payload: {}})
