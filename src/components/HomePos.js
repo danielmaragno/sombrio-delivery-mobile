@@ -31,12 +31,24 @@ class HomePos extends React.Component {
   	}
 
   	openModal(item) {
-  		this.props.dispatch({type: 'FETCH_MODAL_ITEM', item: item})
-  		this.props.dispatch({type: 'SET_MODAL_ITEM_VISIBLE', visible: true})
+  		if(this.props.pos.open){
+  			this.props.dispatch({type: 'FETCH_MODAL_ITEM', item: item})
+	  		this.props.dispatch({type: 'SET_MODAL_ITEM_VISIBLE', visible: true})
+  		}
+  		else {
+  			this._PosClosedAlert();
+  		}
   	}
 
   	closeModal() {
   		this.props.dispatch({type: 'SET_MODAL_ITEM_VISIBLE', visible: false})	
+  	}
+
+  	_PosClosedAlert() {
+  		Alert.alert(
+			"Desculpe",
+			"Não é possível fazer pedidos. Estamos fechados no momento."
+  		)
   	}
 
 	render() {
@@ -67,11 +79,11 @@ class HomePos extends React.Component {
 						
 						<List>
 							{
-								items.map((i, index) => (
+								items.map((item, index) => (
 									<ListItem
-										onPress={() => this.openModal(i)}
-										key={i._id}
-										title={<Item item={i}/>}
+										onPress={() => this.openModal(item)}
+										key={item._id}
+										title={<Item item={item}/>}
 										
 										// hideChevron={true}
 
