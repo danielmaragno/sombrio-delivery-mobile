@@ -81,6 +81,7 @@ class HomePos extends React.Component {
 							{
 								items.map((item, index) => (
 									<ListItem
+										containerStyle={{backgroundColor: listItemStyle.backgroundColor}}
 										onPress={() => this.openModal(item)}
 										key={item._id}
 										title={<Item item={item}/>}
@@ -108,7 +109,7 @@ class HomePos extends React.Component {
 const Item = ({item}) => {
 	
 	return (
-		<View style={{backgroundColor: listItemStyle.backgroundColor}}>
+		<View>
 			<Grid>
 				<Row>
 					<Col size={3}>

@@ -1,6 +1,7 @@
 export const colorsTable = {
 	// primary: '#3366CC'
     primary: "#27ae60", // green
+    darkPrimary: '#1D7D46',
     info: "#e67e22" //orange
 }
 
@@ -28,16 +29,17 @@ export const viewStyle = {
 
 export const drawerMenuHeaderView = {
 	padding: 13,
-	// backgroundColor: 'grey'
+	backgroundColor: colorsTable.primary
 }
 
 export const drawerMenuHeaderTitle = {
 	fontSize: 20,
     fontWeight: 'bold',
+    // color: '#fff'
 }
 
 export const drawerMenuHeaderSubTitle = {
-	
+	// color: drawerMenuHeaderTitle.color
 }
 
 export const drawerListItems = {

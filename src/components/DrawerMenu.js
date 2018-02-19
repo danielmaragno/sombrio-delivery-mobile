@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { Divider, List, ListItem } from 'react-native-elements';
-import { drawerMenuHeaderView, drawerMenuHeaderTitle, drawerListItems } from '../colors';
+import { drawerMenuHeaderView, drawerMenuHeaderTitle, drawerMenuHeaderSubTitle, drawerListItems, colorsTable } from '../colors';
 
 import { fetchUser, logout } from '../actions/userActions';
 
@@ -34,29 +34,31 @@ class DrawerMenu extends React.Component {
 			      {/*<DrawerItems {...props} />*/}
 					<View style={drawerMenuHeaderView}>
 						<Text style={drawerMenuHeaderTitle}>{name}</Text>
-						<Text>{id}</Text>
+						<Text style={drawerMenuHeaderSubTitle}>{id}</Text>
 					</View>
-					{
-						routesList.map((l,i) => (
-						<ListItem
-							containerStyle={drawerListItems}
-							key={l.key}
-							title={l.params.title}
-							leftIcon={l.params.leftIcon}
-							onPress={() => navigate(l.routeName)}
-						/>
-						))
-					}
-					
-					<List>
-						<ListItem 
-							containerStyle={drawerListItems}
-							key="logout"
-							title="Sair"
-							leftIcon={{name:"power-settings-new"}}
-							onPress={this.logout.bind(this)}
-						/>
-					</List>
+					<View>
+						{
+							routesList.map((l,i) => (
+							<ListItem
+								containerStyle={drawerListItems}
+								key={l.key}
+								title={l.params.title}
+								leftIcon={{...l.params.leftIcon, color: colorsTable.info}}
+								onPress={() => navigate(l.routeName)}
+							/>
+							))
+						}
+						
+						<List>
+							<ListItem 
+								containerStyle={drawerListItems}
+								key="logout"
+								title="Sair"
+								leftIcon={{name:"power-settings-new", color: colorsTable.primary}}
+								onPress={this.logout.bind(this)}
+							/>
+						</List>
+					</View>
 			    </SafeAreaView>
 		  	</ScrollView>
 	  	)
