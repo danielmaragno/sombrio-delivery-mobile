@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Alert, ScrollView, Text, Image } from 'react-native';
+import { View, Alert, ScrollView, Text, Image, BackHandler } from 'react-native';
 import { Card, Divider, Icon, Badge } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { formatMonetary, formatDateTime } from '../utils';
@@ -14,6 +14,19 @@ class OrderExpand extends React.Component {
 		super(props);
 	}
 
+	// handleBackPress() {
+	// 	this.props.navigation.navigate('Orders');
+	// 	Alert.alert('pqp')
+	// }
+
+	// componentDidMount() {
+ //      BackHandler.addEventListener('backPress', this.handleBackPress.bind(this));
+ //    }
+
+ //    componentWillUnmount() {
+ //      BackHandler.removeEventListener('backPress');
+ //    }
+
 	render() {
 
 		const { index } = this.props.navigation.state.params;
@@ -22,6 +35,12 @@ class OrderExpand extends React.Component {
 		return (
 			<View style={viewStyle}>
 				<Header title={`Pedido ${order._id.slice(-4)}`}  navigate={this.props.navigation.navigate} />
+				
+				<View style={{alignItems: 'center', margin: 15}}>
+					<Text style={{fontSize: 18, fontWeight: 'bold', color: colorsTable.info}}>
+						{formatDateTime(order.timeStamp)}
+					</Text>
+				</View>
 
 				<ScrollView>
 					{
@@ -65,12 +84,10 @@ class OrderExpand extends React.Component {
 					}
 				</ScrollView>
 				<View style={{margin: 15}}>
-					<View style={{marginBottom: 15}}>
-						<Text style={{fontSize: 18, fontWeight: 'bold', color: colorsTable.info}}>
-							{formatDateTime(order.timeStamp)}
-						</Text>
+					<View style={order.pos_comentario ? {marginBottom: 15, marginTop: 15} : {display: 'none'}}>
+						<Text style={{fontWeight: 'bold', color: listItemStyle.color}}>Comentário do Lojista</Text>
+						<Text style={{color: listItemStyle.color}}>{order.pos_comentario}</Text>
 					</View>
-					
 					<View style={{flexDirection: 'row'}}>
 						<View>
 							<Badge 

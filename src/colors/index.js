@@ -28,7 +28,8 @@ export const viewStyle = {
 
 
 export const drawerMenuHeaderView = {
-	padding: 13,
+	paddingTop: 13+15, // Status bar overlap
+    padding: 13,
 	backgroundColor: colorsTable.primary
 }
 

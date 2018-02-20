@@ -81,7 +81,7 @@ class ExecOrder extends React.Component {
 		
 		return (
 			<View style={viewModifiedStyle}>
-				<Header title="Pedido"  navigate={this.props.navigation.navigate} />
+				<Header title="Finaliza Pedido"  navigate={this.props.navigation.navigate} />
 				
 				<ScrollView>
 					<View style={{marginBottom: 10}}>
