@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Card, Button, Divider, FormLabel } from 'react-native-elements';
 import Header from './Header';
 import FormaPagamento from './FormaPagamento';
-import { viewStyle, headerStyle, listItemStyle, colorsTable, bottomInfo, bottomInfoText } from '../colors';
+import { viewStyle, headerStyle, listItemStyle, colorsTable, bottomInfo, bottomInfoText, dataStyle } from '../colors';
 import { formatMonetary, formatAddress } from '../utils';
 
 import { calcTotalPrice, execOrder } from '../actions/cartActions';
@@ -86,39 +86,39 @@ class ExecOrder extends React.Component {
 				<ScrollView>
 					<View style={{marginBottom: 10}}>
 						
-						<View style={style.viewBlock}>
-							<Text style={style.viewBlockTitle}>Endereço de Entrega</Text>
-							<Text style={user.address ? style.viewBlockContent : {display: 'none'}}>
+						<View style={dataStyle.viewBlock}>
+							<Text style={dataStyle.viewBlockTitle}>Endereço de Entrega</Text>
+							<Text style={user.address ? dataStyle.viewBlockContent : {display: 'none'}}>
 								{formatAddress(user.address)}
 							</Text>
 							<TouchableOpacity 
 								style={user.address ? {display: 'none'} : {} } 
 								onPress={() => this.props.navigation.navigate('AddressNew')}
 							>
-								<Text style={{...style.viewBlockContent, color: 'red', fontWeight: 'bold'}}>
+								<Text style={{...dataStyle.viewBlockContent, color: 'red', fontWeight: 'bold'}}>
 									Clique aqui para informar o endereço de entrega!
 								</Text>
 							</TouchableOpacity>
 						</View>
 						
-						<View style={style.viewBlock}>
-							<Text style={style.viewBlockTitle}>Forma de Pagamento</Text>
+						<View style={dataStyle.viewBlock}>
+							<Text style={dataStyle.viewBlockTitle}>Forma de Pagamento</Text>
 							<FormaPagamento />
 						</View>
 						
-						<View style={style.viewBlock}>
-							<Text style={style.viewBlockTitle}>Revise seu Pedido</Text>
+						<View style={dataStyle.viewBlock}>
+							<Text style={dataStyle.viewBlockTitle}>Revise seu Pedido</Text>
 							{
 								cart.items.map((item, i) => (
 									<View key={i}>
 										<View style={{flexDirection: 'row'}}>
 											<View>
-												<Text style={style.viewBlockContent}>
+												<Text style={dataStyle.viewBlockContent}>
 													{item.name}
 												</Text>
 											</View>
 											<View style={{flex:1, alignItems: 'flex-end'}}>
-												<Text style={style.viewBlockContent}>
+												<Text style={dataStyle.viewBlockContent}>
 													{`${item.qtd}x`}
 												</Text>
 											</View>
@@ -126,8 +126,8 @@ class ExecOrder extends React.Component {
 										<View style={!item.observacao ? {display: 'none'} : {}}>
 											<Text
 												style={{
-													paddingLeft: style.viewBlockContent.paddingLeft,
-													paddingRight: style.viewBlockContent.paddingRight
+													paddingLeft: dataStyle.viewBlockContent.paddingLeft,
+													paddingRight: dataStyle.viewBlockContent.paddingRight
 												}}
 											>
 												{item.observacao}
@@ -138,16 +138,16 @@ class ExecOrder extends React.Component {
 							}
 						</View>
 
-						<View style={cart.observacao ? style.viewBlock : {display: 'none'} }>
-							<Text style={style.viewBlockTitle}>Observações Gerais</Text>
-							<Text style={style.viewBlockContent}>{cart.observacao}</Text>
+						<View style={cart.observacao ? dataStyle.viewBlock : {display: 'none'} }>
+							<Text style={dataStyle.viewBlockTitle}>Observações Gerais</Text>
+							<Text style={dataStyle.viewBlockContent}>{cart.observacao}</Text>
 
 						</View>
 
 						{/*
 						<Card>
-							<KeyboardAwareScrollView style={style.viewBlock}>
-								<Text style={style.viewBlockTitle}>Observação</Text>
+							<KeyboardAwareScrollView style={dataStyle.viewBlock}>
+								<Text style={dataStyle.viewBlockTitle}>Observação</Text>
 								<TextInput 
 									multiline={true}
 									numberOfLines={4}
@@ -191,23 +191,25 @@ class ExecOrder extends React.Component {
 	}
 }
 
-const style = {
-	viewBlock: {
-		marginTop: 10,
-		padding: 10, 
-		// backgroundColor: listItemStyle.backgroundColor
-	},
-	viewBlockTitle: {
-		// paddingLeft: 10, paddingRight: 10
-	},
-	viewBlockContent: {
-		color: '#000',
-		fontSize: 16,
-		paddingLeft: 10,
-		paddingRight: 10,
-		marginTop: 10
-	}
-}
+// const style = {
+// 	viewBlock: {
+// 		marginTop: 10,
+// 		padding: 10, 
+// 		// backgroundColor: listItemStyle.backgroundColor
+// 	},
+// 	viewBlockTitle: {
+// 		// paddingLeft: 10, paddingRight: 10
+// 		color: '#444',
+// 		fontWeight: 'bold'
+// 	},
+// 	viewBlockContent: {
+// 		color: '#444',
+// 		fontSize: 16,
+// 		paddingLeft: 10,
+// 		paddingRight: 10,
+// 		marginTop: 10
+// 	}
+// }
 
 const mapStateProps = state => {
 	return {

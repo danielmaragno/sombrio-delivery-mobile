@@ -2,6 +2,7 @@ export const colorsTable = {
 	// primary: '#3366CC'
     primary: "#27ae60", // green
     darkPrimary: '#1D7D46',
+    lightPrimary: '#CCFFCC',
     info: "#e67e22", //orange,
     baseBackground: '#f0ead6', // marrom bem claro 
 }
@@ -62,7 +63,7 @@ export const orderStatusMap = {
     	color: '#e74c3c'
     },
     on_road: {
-    	title: 'Saiu para Entrega',
+    	title: 'Saiu p/ Entrega',
     	color: '#2980b9'
     },
     done: {
@@ -87,4 +88,24 @@ export const bottomInfoText = {
     fontWeight: 'bold', 
     fontSize: 20,
     color: '#444' 
+}
+
+export const dataStyle = {
+    viewBlock: {
+        marginTop: 15,
+        padding: 10, 
+        // backgroundColor: listItemStyle.backgroundColor
+    },
+    viewBlockTitle: {
+        // paddingLeft: 10, paddingRight: 10
+        color: '#444',
+        fontWeight: 'bold'
+    },
+    viewBlockContent: {
+        color: '#444',
+        fontSize: 16,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginTop: 10
+    }
 }

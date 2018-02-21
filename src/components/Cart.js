@@ -83,7 +83,7 @@ class Cart extends React.Component {
 						<View style={{...bottomInfo, paddingBottom: 0}}>
 							{
 								cart.items.map((item, index) => (
-									<View key={index} style={{marginBottom: 15}}>
+									<View key={index} style={{marginBottom: 20}}>
 										<Grid>
 											{/*
 											<Col size={2}>

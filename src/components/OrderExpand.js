@@ -4,7 +4,7 @@ import { View, Alert, ScrollView, Text, Image, BackHandler } from 'react-native'
 import { Card, Divider, Icon, Badge } from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { formatMonetary, formatDateTime } from '../utils';
-import { viewStyle, orderStatusMap, listItemStyle, colorsTable } from '../colors';
+import { viewStyle, orderStatusMap, listItemStyle, colorsTable, bottomInfo, bottomInfoText } from '../colors';
 import Header from './Header';
 import { http_url } from '../http_config';
 
@@ -38,8 +38,23 @@ class OrderExpand extends React.Component {
 				
 				<View style={{alignItems: 'center', margin: 15}}>
 					<Text style={{fontSize: 18, fontWeight: 'bold', color: colorsTable.info}}>
-						{formatDateTime(order.timeStamp)}
+						Pão de Mel
 					</Text>
+				</View>
+
+				<View style={{flexDirection: 'row', paddingLeft: 10, paddingRight: 10, marginBottom: 15}}>
+					<View>
+						<Text style={{color: '#444', fontSize: 16}}>{formatDateTime(order.timeStamp)}</Text>
+					</View>
+					<View style={{flex:1, alignItems: 'flex-end'}}>
+						<Badge 
+							containerStyle={{backgroundColor: orderStatusMap[order.status].color}}
+						>
+							<Text style={{color:'white'}}>
+								{orderStatusMap[order.status].title}
+							</Text>
+						</Badge>
+					</View>
 				</View>
 
 				<ScrollView>
@@ -83,23 +98,22 @@ class OrderExpand extends React.Component {
 						))
 					}
 				</ScrollView>
-				<View style={{margin: 15}}>
-					<View style={order.pos_comentario ? {marginBottom: 15, marginTop: 15} : {display: 'none'}}>
-						<Text style={{fontWeight: 'bold', color: listItemStyle.color}}>Comentário do Lojista</Text>
-						<Text style={{color: listItemStyle.color}}>{order.pos_comentario}</Text>
+				<View style={bottomInfo}>
+					<View style={order.pos_comentario ? {paddingBottom: 20} : {display: 'none'}}>
+						<Text style={{fontWeight: 'bold', color: listItemStyle.color, fontSize:16}}>Comentário do Lojista</Text>
+						<Text style={{padding:10,  color: listItemStyle.color}}>{order.pos_comentario}</Text>
 					</View>
 					<View style={{flexDirection: 'row'}}>
 						<View>
-							<Badge 
-								containerStyle={{backgroundColor: orderStatusMap[order.status].color}}
-							>
-								<Text style={{color:'white', fontSize: 18}}>
-									{orderStatusMap[order.status].title}
-								</Text>
-							</Badge>
+							<Text style={{color: colorsTable.info, fontWeight: 'bold'}}>
+								{`Taxa de Entrega`}
+							</Text>
+							<Text style={{color: colorsTable.info, fontWeight: 'bold'}}>
+								{`R$ ${ formatMonetary(order.deliveryPrice)}`}
+							</Text>
 						</View>
 						<View style={{flex: 1, alignItems: 'flex-end'}}>
-							<Text style={{fontSize: 18, fontWeight: 'bold', color: listItemStyle.color}}>
+							<Text style={bottomInfoText}>
 								{`Total R$ ${formatMonetary(order.total_price)}`}
 							</Text>
 						</View>
