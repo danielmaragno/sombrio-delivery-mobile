@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Card, Button, Divider, FormLabel } from 'react-native-elements';
 import Header from './Header';
 import FormaPagamento from './FormaPagamento';
-import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
+import { viewStyle, headerStyle, listItemStyle, colorsTable, bottomInfo, bottomInfoText } from '../colors';
 import { formatMonetary, formatAddress } from '../utils';
 
 import { calcTotalPrice, execOrder } from '../actions/cartActions';
@@ -161,8 +161,8 @@ class ExecOrder extends React.Component {
 				</ScrollView>
 
 				<View>
-					<View style={{flexDirection: "row", marginBottom: 5, marginTop: 5}}>
-						<View style={{width: "40%", paddingLeft: 15}}>
+					<View style={{...bottomInfo, flexDirection: "row"}}>
+						<View>
 							<Text style={{color: colorsTable.info, fontWeight: 'bold'}}>
 								{`Taxa de Entrega`}
 							</Text>
@@ -170,8 +170,8 @@ class ExecOrder extends React.Component {
 								{`R$ ${ formatMonetary(pos.deliveryPrice)}`}
 							</Text>
 						</View>
-						<View style={{width: "60%", paddingRight: 15}}>
-							<Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'right'}}>
+						<View style={{alignItems: 'flex-end', flex: 1}}>
+							<Text style={bottomInfoText}>
 								{`Total R$ ${formatMonetary(pos.deliveryPrice + calcTotalPrice(cart) )}`}
 							</Text>
 						</View>

@@ -6,7 +6,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Header from './Header';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { formatMonetary, RandomString } from '../utils';
-import { viewStyle, headerStyle, listItemStyle, colorsTable } from '../colors';
+import { viewStyle, headerStyle, listItemStyle, colorsTable, bottomInfo, bottomInfoText } from '../colors';
 import { http_url } from '../http_config';
 
 import { removeCartItem, calcTotalPrice } from '../actions/cartActions';
@@ -71,55 +71,70 @@ class Cart extends React.Component {
 				<View style={!cart.items.length ? {display: "none"} : {flex: 1}}>
 					
 					<ScrollView>
-						{
-							cart.items.map((item, index) => (
-								<View key={index} style={{backgroundColor: listItemStyle.backgroundColor}}>
-									<Grid>
-										<Col size={2}>
-											<Image 
-												source={{uri: http_url+item.image}}
-												style={{width: 60, height: 40}}
-											/>
-										</Col>
-										<Col size={6}>
-											<Row>
-												<Text 
-													style={{fontWeight: 'bold', color: listItemStyle.color, fontSize: 16}}
-													numberOfLines={1}
-													adjustsFontSizeToFit
-												>
-													{item.name}
-												</Text>
-											</Row>
+						
+						{/*
+							<View style={bottomInfo}>
+								<Text style={{fontWeight: 'bold', fontSize: 16}}>
+									Itens do Carrinho
+								</Text>
+							</View>
+						*/}
 
-											<Row style={!item.observacao ? {display: 'none'} : {}}>
-												<Text>{item.observacao}</Text>
-											</Row>
-											
-											<Row>
-												<Text style={{color: listItemStyle.color, fontSize: 16}}>
-													{`${item.qtd}x`}
-												</Text>
-												<Text style={{color: listItemStyle.color, fontSize: 16, position: 'absolute', right: 0}}>
-													{`R$ ${formatMonetary(item.price_un * item.qtd)}`}
-												</Text>
-											</Row>
-										</Col>
-										<Col size={1}>
-											<Icon 
-												name='clear'
-												color='#A2A2A2'
-												onPress={() => this._showRemoveItemConfirm(item, index)}
-											/>
-										</Col>
-									</Grid>
-									<Divider />
-								</View>
-							))
-						}
+						<View style={{...bottomInfo, paddingBottom: 0}}>
+							{
+								cart.items.map((item, index) => (
+									<View key={index} style={{marginBottom: 15}}>
+										<Grid>
+											{/*
+											<Col size={2}>
+												<Image 
+													source={{uri: http_url+item.image}}
+													style={{width: 60, height: 40}}
+												/>
+											</Col>
+											*/}
+											<Col size={12} style={{paddingRight:15}}>
+												<Row>
+													<Text 
+														style={{fontWeight: 'bold', color: listItemStyle.color, fontSize: 16}}
+														numberOfLines={1}
+														adjustsFontSizeToFit
+													>
+														{item.name}
+													</Text>
+												</Row>
+
+												<Row style={!item.observacao ? {display: 'none'} : {}}>
+													<Text>{item.observacao}</Text>
+												</Row>
+												
+												<Row>
+													<Text style={{color: listItemStyle.color, fontSize: 16}}>
+														{`${item.qtd}x`}
+													</Text>
+													<Text style={{color: listItemStyle.color, fontSize: 16, position: 'absolute', right: 0}}>
+														{`R$ ${formatMonetary(item.price_un * item.qtd)}`}
+													</Text>
+												</Row>
+											</Col>
+											<Col size={1}>
+												<Icon 
+													name='clear'
+													color='#A2A2A2'
+													onPress={() => this._showRemoveItemConfirm(item, index)}
+												/>
+											</Col>
+										</Grid>
+										
+									</View>
+								))
+							}
+							
+						</View>
 					</ScrollView>
 					
 					<View>
+						{/*
 						<View style={{padding: 10, marginTop: 3}}>
 							<KeyboardAwareScrollView>
 								<Text>Observações Gerais</Text>
@@ -131,27 +146,17 @@ class Cart extends React.Component {
 								/>
 							</KeyboardAwareScrollView>
 						</View>
-						<View style={{flexDirection: 'row'}}>
-							<View style={{width: "50%"}}>
-								<Text style={{
-									margin: 10,
-									color: '#444', fontWeight: 'bold', fontSize: 18
-								}}>
+						*/}
+						<View style={{...bottomInfo, flexDirection: 'row'}}>
+							<View>
+								<Text style={bottomInfoText}>
 									{`Total R$ ${formatMonetary(calcTotalPrice(cart))}`}
 								</Text>
 							</View>
-							<View style={{width: '50%'}}>
-								{/*
-									<Button
-										containerViewStyle={{paddingTop: 1, paddingBottom: 1}} 
-										title="Esvaziar"
-									/>
-								*/}
+							<View style={{alignItems: 'flex-end', flex: 1}}>
+								
 								<TouchableOpacity onPress={() => this._showEmptyChartConfirm()}>
-									<Text style={{
-										margin: 10, 
-										fontSize: 18, fontWeight: 'bold', color: colorsTable.info, textAlign: 'right' 
-									}}>
+									<Text style={{...bottomInfoText, color: colorsTable.info}}>
 										Esvaziar
 									</Text>
 								</TouchableOpacity>

@@ -2,7 +2,8 @@ export const colorsTable = {
 	// primary: '#3366CC'
     primary: "#27ae60", // green
     darkPrimary: '#1D7D46',
-    info: "#e67e22" //orange
+    info: "#e67e22", //orange,
+    baseBackground: '#f0ead6', // marrom bem claro 
 }
 
 export const headerStyle = {
@@ -23,7 +24,7 @@ export const viewStyle = {
     // paddingBottom: 15,
     // backgroundColor: "#A4A9AE", // mais escuro
     // backgroundColor: '#B0C7DE' // azul claro
-    backgroundColor: '#f0ead6' // marrom bem claro
+    backgroundColor: colorsTable.baseBackground // marrom bem claro
 }
 
 
@@ -73,4 +74,17 @@ export const orderStatusMap = {
 export const listItemStyle = {
     backgroundColor: "#fff",
     color: "#444"
+}
+
+export const bottomInfo = {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 25,
+    paddingTop: 25
+}
+
+export const bottomInfoText = {
+    fontWeight: 'bold', 
+    fontSize: 20,
+    color: '#444' 
 }
