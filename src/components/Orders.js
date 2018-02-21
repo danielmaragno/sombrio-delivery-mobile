@@ -38,8 +38,19 @@ class Orders extends React.Component {
 								<Card  key={i}>
 									<TouchableOpacity onPress={() => this.props.navigation.navigate('OrderExpand', {index: i})}>
 										<Grid>
+											<Row style={{paddingBottom: 10}}>
+												<Text 
+													style={{
+														fontWeight: 'bold',
+														fontSize: 16,
+														color: '#444'
+													}}
+												>
+													{o.pos_name}
+												</Text>
+											</Row>
 											<Row style={{height: 30}}>
-												<Text style={{fontWeight: 'bold', color: '#424242'}}>
+												<Text style={{fontWeight: 'bold'}}>
 													{`#${o._id.slice(-4)}`}
 												</Text>
 												<Badge 

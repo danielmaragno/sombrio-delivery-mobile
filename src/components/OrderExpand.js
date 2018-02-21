@@ -37,12 +37,12 @@ class OrderExpand extends React.Component {
 				<Header title={`Pedido ${order._id.slice(-4)}`}  navigate={this.props.navigation.navigate} />
 				
 				<View style={{alignItems: 'center', margin: 15}}>
-					<Text style={{fontSize: 18, fontWeight: 'bold', color: colorsTable.info}}>
-						Pão de Mel
+					<Text style={{fontSize: 18, fontWeight: 'bold', color: "#444"}}>
+						{order.pos_name}
 					</Text>
 				</View>
 
-				<View style={{flexDirection: 'row', paddingLeft: 10, paddingRight: 10, marginBottom: 15}}>
+				<View style={{flexDirection: 'row', paddingLeft: 10, paddingRight: 10, marginBottom: 25}}>
 					<View>
 						<Text style={{color: '#444', fontSize: 16}}>{formatDateTime(order.timeStamp)}</Text>
 					</View>
