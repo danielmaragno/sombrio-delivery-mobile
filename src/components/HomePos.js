@@ -74,27 +74,27 @@ class HomePos extends React.Component {
 						}
 					</View>
 				</View>
-				<View>
-					<ScrollView>
-						
-						<List>
-							{
-								items.map((item, index) => (
-									<ListItem
-										containerStyle={{backgroundColor: listItemStyle.backgroundColor}}
-										onPress={() => this.openModal(item)}
-										key={item._id}
-										title={<Item item={item}/>}
-										
-										// hideChevron={true}
-
-									/>
-								))
-							}
-						</List>
+				
+				<ScrollView>
 					
-					</ScrollView>
-				</View>
+					
+						{
+							items.map((item, index) => (
+								<ListItem
+									containerStyle={{backgroundColor: listItemStyle.backgroundColor}}
+									onPress={() => this.openModal(item)}
+									key={item._id}
+									title={<Item item={item}/>}
+									
+									// hideChevron={true}
+
+								/>
+							))
+						}
+					
+				
+				</ScrollView>
+				
 				
 				<ItemModal 
 					visible={visible}
@@ -118,19 +118,21 @@ const Item = ({item}) => {
 							style={{width: 60, height: 40}}
 						/>
 					</Col>
-					<Col size={6}>
+					<Col size={8}>
 						<Text style={{color: listItemStyle.color}}>
 							{item.name}
+						</Text>
+						<Text>
+							{item.complement}
 						</Text>
 					</Col>
 					<Col size={3}>
 						<Text style={{color: listItemStyle.color, position: 'absolute', right: 0}}>
-							{`R$ ${formatMonetary(item.price)}`}
+							{`$ ${formatMonetary(item.price)}`}
 						</Text>
 					</Col>
 				</Row>
 			</Grid>
-				
 		</View>
 	)
 }
