@@ -123,7 +123,7 @@ const Item = ({item}) => {
 							{item.name}
 						</Text>
 						<Text>
-							{item.complement}
+							{item.info}
 						</Text>
 					</Col>
 					<Col size={3}>

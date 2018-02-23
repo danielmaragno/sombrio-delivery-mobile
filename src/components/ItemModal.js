@@ -67,7 +67,7 @@ class ItemModal extends React.Component {
 							</Row>
 							<Row>
 								<Text style={{fontSize: 16}}>
-									{item.complement}
+									{item.info}
 								</Text>
 							</Row>
 							<Row style={{marginTop: 20}}>
