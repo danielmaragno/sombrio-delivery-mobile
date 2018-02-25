@@ -53,10 +53,10 @@ class ItemModal extends React.Component {
 			>
 				<View style={viewStyle}>
 					<ScrollView>
-						<View>
+						<View style={{height: 230, backgroundColor: '#FFF'}}>
 							<Image 
 								source={{uri: http_url+item.image}}
-								style={{width: "100%", height: 230}}
+								style={{flex: 1, width: null, height: null, resizeMode: 'contain'}}
 							/>
 						</View>
 						<Grid style={{padding: 18}}>

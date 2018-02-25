@@ -112,22 +112,22 @@ const Item = ({item}) => {
 		<View>
 			<Grid>
 				<Row>
-					<Col size={3}>
+					<Col size={4} style={{height: 60}}>
 						<Image 
 							source={{uri: http_url+item.image}}
-							style={{width: 60, height: 40}}
+							style={{flex: 1, width: null, height: null, resizeMode: 'contain'}}
 						/>
 					</Col>
 					<Col size={8}>
-						<Text style={{color: listItemStyle.color}}>
+						<Text style={{color: listItemStyle.color, fontWeight: 'bold'}}>
 							{item.name}
 						</Text>
-						<Text>
+						<Text style={{fontWeight: 'bold'}}>
 							{item.info}
 						</Text>
 					</Col>
 					<Col size={3}>
-						<Text style={{color: listItemStyle.color, position: 'absolute', right: 0}}>
+						<Text style={{color: listItemStyle.color, fontWeight: 'bold', position: 'absolute', right: 0}}>
 							{`$ ${formatMonetary(item.price)}`}
 						</Text>
 					</Col>
