@@ -31,6 +31,7 @@ class ItemModal extends React.Component {
 		const item = {
 			_id: itemModal.item._id,
 			name: itemModal.item.name,
+			info: itemModal.item.info,
 			price_un: itemModal.item.price,
 			qtd: itemModal.qtd,
 			image: itemModal.item.image,

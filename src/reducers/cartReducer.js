@@ -15,6 +15,7 @@ const initialState = {
     ],
 	observacao: "",
 	formaPagamento: "",
+	change: "0", //troco
 
 	execOrderLoading: false,
 	execOrderAlertSuccess: false
@@ -35,6 +36,7 @@ export default function reducer(state=initialState, action){
 				items: [], 
 				observacao: initialState.observacao,
 				formaPagamento: "",
+				change: "0",
 				execOrderLoading: false,
 				execOrderAlertSuccess: false
 			}
@@ -47,6 +49,9 @@ export default function reducer(state=initialState, action){
 		}
 		case 'SET_CART_FORMA_PAGAMENTO': {
 			return {...state, formaPagamento: action.formaPagamento}
+		}
+		case 'SET_CART_CHANGE': {
+			return {...state, change: action.change}
 		}
 		case 'EXEC_ORDER_SET_LOADING': {
 			return {...state, execOrderLoading: action.loading}

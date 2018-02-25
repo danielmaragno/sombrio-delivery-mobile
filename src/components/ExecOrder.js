@@ -8,6 +8,7 @@ import Header from './Header';
 import FormaPagamento from './FormaPagamento';
 import { viewStyle, headerStyle, listItemStyle, colorsTable, bottomInfo, bottomInfoText, dataStyle } from '../colors';
 import { formatMonetary, formatAddress } from '../utils';
+import { TextInputMask } from 'react-native-masked-text';
 
 import { calcTotalPrice, execOrder } from '../actions/cartActions';
 
@@ -21,6 +22,13 @@ class ExecOrder extends React.Component {
 		this.props.dispatch({type: 'SET_OBSERVACAO', observacao: observacao})
 	}
 
+	setMoneyChange(change) {
+		this.props.dispatch({
+			type: 'SET_CART_CHANGE',
+			change: change
+		})
+	}
+
 	execOrder() {
 		const { pos, cart, user } = this.props;
 		if(!user.address){
@@ -31,9 +39,10 @@ class ExecOrder extends React.Component {
 			this._missingFormaPagamentoAlert()
 			return;
 		}
-		
+
 		const info = {
 			formaPagamento: cart.formaPagamento,
+			change: cart.formaPagamento === 'dinheiro' ? parseInt(cart.change.replace(/\D/g, '')) : 0,
 			observacao: cart.observacao,
 			items: cart.items
 		}
@@ -78,14 +87,16 @@ class ExecOrder extends React.Component {
 
 		const { pos, cart, user } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
+		const total_price = pos.deliveryPrice + calcTotalPrice(cart);
 		
 		return (
 			<View style={viewModifiedStyle}>
-				<Header title="Finaliza Pedido"  navigate={this.props.navigation.navigate} />
+				<Header title="Finalizar Pedido"  navigate={this.props.navigation.navigate} />
 				
 				<ScrollView>
 					<View style={{marginBottom: 10}}>
 						
+						{/* Endereço */}
 						<View style={dataStyle.viewBlock}>
 							<Text style={dataStyle.viewBlockTitle}>Endereço de Entrega</Text>
 							<Text style={user.address ? dataStyle.viewBlockContent : {display: 'none'}}>
@@ -101,11 +112,35 @@ class ExecOrder extends React.Component {
 							</TouchableOpacity>
 						</View>
 						
+						{/* Forma de Pagamento */}
 						<View style={dataStyle.viewBlock}>
 							<Text style={dataStyle.viewBlockTitle}>Forma de Pagamento</Text>
 							<FormaPagamento />
+							<View style={cart.formaPagamento === 'dinheiro' ? {flexDirection: 'row'} : {display: 'none'}}>
+								<View>
+									<Text style={dataStyle.viewBlockContent}>
+										Troco para
+									</Text>
+								</View>
+								<View>
+									<TextInputMask 
+										style={{
+											color: dataStyle.viewBlockContent.color,
+											fontSize: dataStyle.viewBlockContent.fontSize
+										}}
+										options={{
+											unit: 'R$ '
+										}}
+										// underlineColorAndroid={'transparent'}
+										type={'money'}
+										value={cart.change}
+										onChangeText={this.setMoneyChange.bind(this)}
+									/>
+								</View>
+							</View>
 						</View>
 						
+						{/* Pedido (itens) */}
 						<View style={dataStyle.viewBlock}>
 							<Text style={dataStyle.viewBlockTitle}>Revise seu Pedido</Text>
 							{
@@ -122,6 +157,17 @@ class ExecOrder extends React.Component {
 													{`${item.qtd}x`}
 												</Text>
 											</View>
+										</View>
+										<View>
+											<Text 
+												style={{
+													color: dataStyle.viewBlockContent.color,
+													paddingLeft: dataStyle.viewBlockContent.paddingLeft,
+													paddingRight: dataStyle.viewBlockContent.paddingRight
+												}}
+											>
+												{item.info}
+											</Text>
 										</View>
 										<View style={!item.observacao ? {display: 'none'} : {}}>
 											<Text
@@ -144,19 +190,6 @@ class ExecOrder extends React.Component {
 
 						</View>
 
-						{/*
-						<Card>
-							<KeyboardAwareScrollView style={dataStyle.viewBlock}>
-								<Text style={dataStyle.viewBlockTitle}>Observação</Text>
-								<TextInput 
-									multiline={true}
-									numberOfLines={4}
-									value={cart.observacao}
-									onChangeText={(observacao) => this.changeObservacao(observacao)}
-								/>
-							</KeyboardAwareScrollView>
-						</Card>
-						*/}
 					</View>
 				</ScrollView>
 
@@ -172,7 +205,7 @@ class ExecOrder extends React.Component {
 						</View>
 						<View style={{alignItems: 'flex-end', flex: 1}}>
 							<Text style={bottomInfoText}>
-								{`Total R$ ${formatMonetary(pos.deliveryPrice + calcTotalPrice(cart) )}`}
+								{`Total R$ ${formatMonetary(total_price)}`}
 							</Text>
 						</View>
 					</View>

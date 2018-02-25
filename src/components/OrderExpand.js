@@ -62,10 +62,10 @@ class OrderExpand extends React.Component {
 						order.items.map((item, index) => (
 							<View key={index} style={{backgroundColor: listItemStyle.backgroundColor}}>
 								<Grid>
-									<Col size={2}>
+									<Col size={2} style={{height: 60, marginRight: 5, backgroundColor: '#FFF', borderRadius: 10}}>
 										<Image 
 											source={{uri: http_url+item.image}}
-											style={{width: 60, height: 40}}
+											style={{flex: 1, width: null, height: null, resizeMode: 'contain'}}
 										/>
 									</Col>
 									<Col size={6} style={{paddingRight: 10}}>
@@ -76,6 +76,11 @@ class OrderExpand extends React.Component {
 												adjustsFontSizeToFit
 											>
 												{item.name}
+											</Text>
+										</Row>
+										<Row style={!item.info ? {display: 'none'} : {}}>
+											<Text style={{fontWeight: 'bold', color: listItemStyle.color}}>
+												{item.info}
 											</Text>
 										</Row>
 

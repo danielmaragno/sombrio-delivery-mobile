@@ -56,7 +56,6 @@ class Cart extends React.Component {
 
 		const { cart } = this.props;
 		const viewModifiedStyle = {...viewStyle, paddingBottom: 0}
-		console.log(cart);
 		
 		return (
 			<View style={viewModifiedStyle} >
@@ -101,6 +100,11 @@ class Cart extends React.Component {
 														adjustsFontSizeToFit
 													>
 														{item.name}
+													</Text>
+												</Row>
+												<Row style={!item.info ? {display: 'none'} : {}}>
+													<Text style={{fontWeight: 'bold', color: listItemStyle.color}}>
+														{item.info}
 													</Text>
 												</Row>
 
