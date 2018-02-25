@@ -81,7 +81,7 @@ class HomePos extends React.Component {
 						{
 							items.map((item, index) => (
 								<ListItem
-									containerStyle={{backgroundColor: listItemStyle.backgroundColor}}
+									// containerStyle={{backgroundColor: listItemStyle.backgroundColor}}
 									onPress={() => this.openModal(item)}
 									key={item._id}
 									title={<Item item={item}/>}
@@ -112,7 +112,7 @@ const Item = ({item}) => {
 		<View>
 			<Grid>
 				<Row>
-					<Col size={4} style={{height: 60}}>
+					<Col size={4} style={{height: 60, marginRight: 5, backgroundColor: '#FFF', borderRadius: 10}}>
 						<Image 
 							source={{uri: http_url+item.image}}
 							style={{flex: 1, width: null, height: null, resizeMode: 'contain'}}
