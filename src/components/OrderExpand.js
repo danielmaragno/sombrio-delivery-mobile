@@ -29,8 +29,8 @@ class OrderExpand extends React.Component {
 
 	render() {
 
-		const { index } = this.props.navigation.state.params;
-		const order = this.props.orders.orders[index];
+		const { order_id } = this.props.navigation.state.params;
+		const order = this.props.orders.ordersMap[order_id];
 		
 		return (
 			<View style={viewStyle}>

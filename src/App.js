@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
 
 import { base_url } from './http_config';
-import { fetchOrders } from './actions/ordersActions';
+import { fetchOrders, updateOrderStatus } from './actions/ordersActions';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -64,11 +64,12 @@ class App extends React.Component {
     const { token } = this.props.user;
     if(token){
       // Alright, now lets check for a waiting order 
-      const { orders } = this.props.orders;
+      const { orders, ordersMap } = this.props.orders;
       for(let i in orders){
-        if(['requested', 'confirmed', 'on_road'].indexOf(orders[i].status) >= 0){
-          this.props.dispatch(fetchOrders(token));
-          break;
+        if(['requested', 'confirmed', 'on_road'].indexOf(ordersMap[orders[i]].status) >= 0){
+          
+          this.props.dispatch(updateOrderStatus(token, orders[i], ordersMap[orders[i]].status))
+          
         }
       }
     }

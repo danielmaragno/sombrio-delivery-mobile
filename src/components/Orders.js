@@ -20,7 +20,7 @@ class Orders extends React.Component {
 
 	render() {
 		
-		const { orders } = this.props.orders;
+		const { orders, ordersMap } = this.props.orders;
 		
 		return (
 				
@@ -34,46 +34,51 @@ class Orders extends React.Component {
 					</Card>
 					<View style={{marginBottom: 10}}>
 						{
-							orders.map((o, i) => (
-								<Card  key={i}>
-									<TouchableOpacity onPress={() => this.props.navigation.navigate('OrderExpand', {index: i})}>
-										<Grid>
-											<Row style={{paddingBottom: 10}}>
-												<Text 
-													style={{
-														fontWeight: 'bold',
-														fontSize: 16,
-														color: '#444'
-													}}
-												>
-													{o.pos_name}
-												</Text>
-											</Row>
-											<Row style={{height: 30}}>
-												<Text style={{fontWeight: 'bold'}}>
-													{`#${o._id.slice(-4)}`}
-												</Text>
-												<Badge 
-													containerStyle={{backgroundColor: orderStatusMap[o.status].color}}
-													wrapperStyle={{	position: 'absolute', right: 0}}
-												>
-													<Text style={{color:'white', fontSize: 12}}>
-														{orderStatusMap[o.status].title}
+							orders.map((order_id, i) => {
+								
+								const o = ordersMap[order_id];
+
+								return (
+									<Card  key={i}>
+										<TouchableOpacity onPress={() => this.props.navigation.navigate('OrderExpand', {order_id: order_id})}>
+											<Grid>
+												<Row style={{paddingBottom: 10}}>
+													<Text 
+														style={{
+															fontWeight: 'bold',
+															fontSize: 16,
+															color: '#444'
+														}}
+													>
+														{o.pos_name}
 													</Text>
-												</Badge>
-											</Row>
-											<Row>
-												<Text style={{fontSize: 16}}>
-													{`R$ ${formatMonetary(o.total_price)}`}
-												</Text>
-												<Text style={{	position: 'absolute', right: 0, bottom:0}}>
-													{formatDateTime(o.timeStamp)}
-												</Text>
-											</Row>
-										</Grid>
-									</TouchableOpacity>
-								</Card>
-							))
+												</Row>
+												<Row style={{height: 30}}>
+													<Text style={{fontWeight: 'bold'}}>
+														{`#${o._id.slice(-4)}`}
+													</Text>
+													<Badge 
+														containerStyle={{backgroundColor: orderStatusMap[o.status].color}}
+														wrapperStyle={{	position: 'absolute', right: 0}}
+													>
+														<Text style={{color:'white', fontSize: 12}}>
+															{orderStatusMap[o.status].title}
+														</Text>
+													</Badge>
+												</Row>
+												<Row>
+													<Text style={{fontSize: 16}}>
+														{`R$ ${formatMonetary(o.total_price)}`}
+													</Text>
+													<Text style={{	position: 'absolute', right: 0, bottom:0}}>
+														{formatDateTime(o.timeStamp)}
+													</Text>
+												</Row>
+											</Grid>
+										</TouchableOpacity>
+									</Card>
+								)
+							})
 						}
 					</View>
 				</ScrollView>
