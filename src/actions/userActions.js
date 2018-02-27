@@ -28,9 +28,9 @@ export function fetchUser(token) {
 	}
 }
 
-export function logout(token) {
+export function logout(token, player_id) {
 	return (dispatch) => {
-		request_get('/auth/logout', token)
+		request_get('/auth/logout?player_id='+player_id, token)
 		
 		.then((response) => {
 			if(response.status === 200){
@@ -68,6 +68,26 @@ export function updateAddress(token, address){
 
 		.catch((error) => {
 			dispatch({type: 'LOADING_ADDRESS_UPDATE_FALSE'})
+			console.log(error);
+		})
+	}
+}
+
+export function registerPlayerId(token, player_id) {
+	return (dispatch) => {
+		request('/client/player_id', 'POST', {player_id: player_id}, token)
+
+		.then((response) => {
+			if(response.status === 200) {
+				dispatch({type: 'FETCH_PLAYER_ID', player_id: player_id})
+				// console.log('TUDO AZUL');
+			}
+			else {
+				console.log(response)
+			}
+		})
+
+		.catch((error) => {
 			console.log(error);
 		})
 	}

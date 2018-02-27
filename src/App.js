@@ -2,9 +2,12 @@ import React from 'react';
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
+import OneSignal from 'react-native-onesignal';
 
 import { base_url } from './http_config';
+
 import { fetchOrders, updateOrderStatus } from './actions/ordersActions';
+import { registerPlayerId } from './actions/userActions';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -52,41 +55,43 @@ class App extends React.Component {
     super(props);
 
     this.state = {token: null}
-    // Current dev screen for hot reload
-    // this.props.navigation.navigate('Register');
-
-    setInterval(() => this.fetchOrders(), 15000);
-
-  }
-
-  fetchOrders() {
-    // First off all, check out for a token (User have to be logged in)
-    const { token } = this.props.user;
-    if(token){
-      // Alright, now lets check for a waiting order 
-      const { orders, ordersMap } = this.props.orders;
-      for(let i in orders){
-        if(['requested', 'confirmed', 'on_road'].indexOf(ordersMap[orders[i]].status) >= 0){
-          
-          this.props.dispatch(updateOrderStatus(token, orders[i], ordersMap[orders[i]].status))
-          
-        }
-      }
-    }
+  
   }
 
   async _checkToken() {
+
     const token = await AsyncStorage.getItem('token');
+    
+    // if user logged in, link OneSignal player_id to this user
+    if(token){
+
+        const { dispatch } = this.props;
+
+        OneSignal.addEventListener('ids', (device)=> {
+          dispatch(registerPlayerId(token, device.userId));
+        });
+
+        OneSignal.addEventListener('received', this.handleNotification.bind(this));
+    }
+
+    // Fetch token and stuff
     this.props.dispatch({type: 'FETCH_TOKEN', token: token})
     const id = await AsyncStorage.getItem('id');
     this.props.dispatch({type: 'FETCH_ID', id: id})
     this.props.dispatch(fetchOrders(token));
   }
 
+  handleNotification() {
+    const { token } = this.props.user;
+    
+    this.props.dispatch(fetchOrders(token));
+  }
+
   componentWillMount() {
     this._checkToken();
+    OneSignal.configure({});
     
-  }
+  } 
 
   render() {
     const { token } = this.props.user;

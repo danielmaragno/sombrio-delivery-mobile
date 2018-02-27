@@ -3667,6 +3667,12 @@ react-native-masked-text@^1.6.5:
     moment "^2.19.1"
     tinymask "^1.0.2"
 
+react-native-onesignal@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.1.0.tgz#bb2e6973946b5080bf7f871ec807989eafa22826"
+  dependencies:
+    invariant "^2.2.2"
+
 react-native-restart@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-restart/-/react-native-restart-0.0.6.tgz#77770d078683947b2c1f2adb876f179269d8443a"
