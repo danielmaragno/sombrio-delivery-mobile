@@ -81,10 +81,16 @@ class App extends React.Component {
     this.props.dispatch(fetchOrders(token));
   }
 
-  handleNotification() {
+  handleNotification(notification) {
     const { token } = this.props.user;
-    
     this.props.dispatch(fetchOrders(token));
+    
+    // const data = notification.additionalData;
+    // this.props.dispatch({
+    //   type: 'UPDATE_ORDER_STATUS',
+    //   order_id: data.order_id,
+    //   status: data.status
+    // })
   }
 
   componentWillMount() {

@@ -43,7 +43,9 @@ class DrawerMenu extends React.Component {
 								containerStyle={drawerListItems}
 								key={l.key}
 								title={l.params.title}
-								leftIcon={{...l.params.leftIcon, color: colorsTable.info}}
+								titleStyle={{fontSize: 15, paddingLeft: 20}}
+								leftIcon={{...l.params.leftIcon, color: "#444"}}
+								hideChevron={true}
 								onPress={() => navigate(l.routeName)}
 							/>
 							))
@@ -54,7 +56,9 @@ class DrawerMenu extends React.Component {
 								containerStyle={drawerListItems}
 								key="logout"
 								title="Sair"
-								leftIcon={{name:"power-settings-new", color: colorsTable.primary}}
+								titleStyle={{fontSize: 15, paddingLeft: 20}}
+								leftIcon={{name:"power-settings-new", color: "#444"}}
+								hideChevron={true}
 								onPress={this.logout.bind(this)}
 							/>
 						</List>

@@ -30,23 +30,25 @@ export const viewStyle = {
 
 
 export const drawerMenuHeaderView = {
-	paddingTop: 13+15, // Status bar overlap
+	paddingTop: 33+15, // Status bar overlap
+    paddingBottom: 18,
     padding: 13,
-	backgroundColor: colorsTable.primary
+    flex: 0.5,
+	backgroundColor: '#2d3436'
 }
 
 export const drawerMenuHeaderTitle = {
 	fontSize: 20,
     fontWeight: 'bold',
-    // color: '#fff'
+    color: '#fff'
 }
 
 export const drawerMenuHeaderSubTitle = {
-	// color: drawerMenuHeaderTitle.color
+	color: drawerMenuHeaderTitle.color
 }
 
 export const drawerListItems = {
-	borderBottomWidth: 0
+	borderBottomWidth: 0,
 }
 
 export const orderStatusMap = {
