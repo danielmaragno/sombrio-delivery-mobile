@@ -51,7 +51,7 @@ export function updateOrderStatus(token, order_id, older_status){
 				
 				// Check if status has changed
 				if(!compareStatus(older_status, order.status)){
-					triggerNotification();
+					// triggerNotification();
 					dispatch({
 						type: 'UPDATE_ORDER_STATUS',
 						order_id: order._id,

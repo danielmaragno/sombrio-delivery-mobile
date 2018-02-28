@@ -8,6 +8,8 @@ import { viewStyle, orderStatusMap, listItemStyle, colorsTable, bottomInfo, bott
 import Header from './Header';
 import { http_url } from '../http_config';
 
+import { updateOrderStatus } from '../actions/ordersActions';
+
 class OrderExpand extends React.Component {
 
 	constructor(props) {
@@ -26,6 +28,13 @@ class OrderExpand extends React.Component {
  //    componentWillUnmount() {
  //      BackHandler.removeEventListener('backPress');
  //    }
+
+ 	componentDidMount() {
+ 		const { token } = this.props.user;
+ 		const { order_id } = this.props.navigation.state.params;
+ 		const { _id, status } = this.props.orders.ordersMap[order_id];
+ 		this.props.dispatch(updateOrderStatus(token, _id, status));
+ 	}
 
 	render() {
 
@@ -134,6 +143,7 @@ class OrderExpand extends React.Component {
 
 const mapStateProps = state => {
 	return {
+		user: state.user,
 		orders: state.orders,
 	}
 }
