@@ -7,7 +7,7 @@ import OneSignal from 'react-native-onesignal';
 import { base_url } from './http_config';
 
 import { fetchOrders, updateOrderStatus } from './actions/ordersActions';
-import { registerPlayerId } from './actions/userActions';
+import { fetchUser, registerPlayerId } from './actions/userActions';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -72,13 +72,15 @@ class App extends React.Component {
         });
 
         OneSignal.addEventListener('received', this.handleNotification.bind(this));
+        
+        // Fetch token and stuff
+        this.props.dispatch({type: 'FETCH_TOKEN', token: token})
+        // const id = await AsyncStorage.getItem('id');
+        // this.props.dispatch({type: 'FETCH_ID', id: id})
+        this.props.dispatch(fetchUser(token));
+        this.props.dispatch(fetchOrders(token));
     }
 
-    // Fetch token and stuff
-    this.props.dispatch({type: 'FETCH_TOKEN', token: token})
-    const id = await AsyncStorage.getItem('id');
-    this.props.dispatch({type: 'FETCH_ID', id: id})
-    this.props.dispatch(fetchOrders(token));
   }
 
   handleNotification(notification) {

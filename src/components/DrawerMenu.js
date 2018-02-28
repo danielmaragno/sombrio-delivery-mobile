@@ -14,8 +14,8 @@ class DrawerMenu extends React.Component {
 	constructor(props) {
 		super(props)
 
-		const token = this.props.user.token;
-		this.props.dispatch(fetchUser(token));
+		// const token = this.props.user.token;
+		// this.props.dispatch(fetchUser(token));
 	}
 	
 	logout(){

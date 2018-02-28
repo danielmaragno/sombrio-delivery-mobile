@@ -10,7 +10,9 @@ export const colorsTable = {
 export const headerStyle = {
     // backgroundColor: '#2F363D', // mais escuro
     // backgroundColor: '#1A64AE' // Azul
-    backgroundColor: colorsTable.primary
+    height: 85,  
+    borderBottomWidth:0, 
+    backgroundColor: colorsTable.primary 
 }
 
 export const headerTitleStyle = { 
@@ -49,6 +51,7 @@ export const drawerMenuHeaderSubTitle = {
 
 export const drawerListItems = {
 	borderBottomWidth: 0,
+    marginTop: 6
 }
 
 export const orderStatusMap = {
