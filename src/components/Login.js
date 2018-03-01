@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { View, Alert, ScrollView, Text } from 'react-native'
+import { View, Alert, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { Header, FormLabel, FormInput, Button, Avatar, Card } from 'react-native-elements'
 import { colorsTable, headerStyle, headerTitleStyle, viewStyle } from '../colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -71,6 +71,10 @@ class Login extends React.Component {
     this.props.navigation.navigate('Register');
   }
 
+  goToPasswdRecovery() {
+    this.props.navigation.navigate('PasswdRecovery');
+  }
+
   componentDidUpdate(nextProps){
     if(this.props.login.errorFlag){
       this.showAlert();
@@ -125,6 +129,16 @@ class Login extends React.Component {
     	     			title='ENTRAR'
     	     			loading={this.props.login.isLoading}
     	     		/>
+              
+              <View style={{marginTop: 18, flex:1, alignItems: 'center'}}>
+                <TouchableOpacity onPress={this.goToPasswdRecovery.bind(this)}>
+                  <Text style={{color: "#2980b9"}}>
+                    Esqueci a Senha
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+
         		</Card>
 
     			

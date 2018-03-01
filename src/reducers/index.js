@@ -9,15 +9,17 @@ import orders from './ordersReducer';
 import itemModal from './itemModalReducer';
 import cart from './cartReducer';
 import address from './addressReducer';
+import passwdRecovery from './passwdRecoveryReducer';
 
 export default combineReducers({
 	form: formReducer,
 	login,
 	register,
+	passwdRecovery,
 	user,
 	pos,
 	orders,
 	itemModal,
 	cart,
-	address
+	address,
 });

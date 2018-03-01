@@ -16,14 +16,19 @@ import Cart from './components/Cart';
 import ExecOrder from './components/ExecOrder';
 import AddressNew from './components/AddressNew';
 import OrderExpand from './components/OrderExpand';
+import PasswdRecovery from './components/PasswdRecovery';
 
 const LoginNavigator = StackNavigator(
 	{
     Login: {screen: Login},
     Register: {screen: Register},
+    PasswdRecovery: {screen: PasswdRecovery}
     // Home: {screen: Home}
 	}
 );
+
+AsyncStorage.setItem("id", "danielcoelho.esk@gmail.com");
+AsyncStorage.setItem("passwd", "h8CqLMtn");
 
 
 import routesList from './routes';
@@ -36,6 +41,7 @@ for(i in routesList)
 routes['Cart'] = {screen: Cart}
 routes['ExecOrder'] = {screen: ExecOrder}
 routes['AddressNew'] = {screen: AddressNew}
+routes['OrderExpand'] = {screen: OrderExpand}
 routes['OrderExpand'] = {screen: OrderExpand}
 
 const AppNavigator = DrawerNavigator(

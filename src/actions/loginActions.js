@@ -1,4 +1,4 @@
-import { request } from '../http_config';
+import { request, request_get } from '../http_config';
 import { AsyncStorage } from 'react-native';
 import RNRestart from 'react-native-restart';
 
@@ -43,6 +43,23 @@ export function execLogin(info) {
 			dispatch({type: 'EXEC_LOGIN_REJECTED'})
 		})
 	} 
+}
+
+export function execPasswdRecovery(id) {
+	return (dispatch) => {
+		dispatch({type: "SET_PASSWD_RECOVERY_IS_LOADING", isLoading: true});
+
+		request_get('/auth/recovery-passwd?id='+id)
+
+		.then((response) => {
+			
+			dispatch({type: "SET_PASSWD_RECOVERY_IS_LOADING", isLoading: false});
+			dispatch({type: "SET_PASSWD_RECOVERY_RESPONSE_FLAG", responseFlag: response.status});
+			
+		})
+
+		.catch()
+	}
 }
 
 export function setFlagErrorFalse() {
