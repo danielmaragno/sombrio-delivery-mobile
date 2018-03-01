@@ -10,6 +10,7 @@ import itemModal from './itemModalReducer';
 import cart from './cartReducer';
 import address from './addressReducer';
 import passwdRecovery from './passwdRecoveryReducer';
+import passwdChange from './passwdChangeReducer';
 
 export default combineReducers({
 	form: formReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
 	itemModal,
 	cart,
 	address,
+	passwdChange
 });

@@ -3,6 +3,7 @@ import Home from './components/Home';
 import HomePos from './components/HomePos';
 import Orders from './components/Orders';
 import Address from './components/Address';
+import PasswdChange from './components/PasswdChange';
 
 const routesList = [
 	{
@@ -35,6 +36,17 @@ const routesList = [
 			title: "Meu Endereço Padrão",
 			leftIcon: {
 				name: "location-on"
+			}
+		}
+	},
+	{
+		key: 'PasswdChange',
+		screen: PasswdChange,
+		routeName: 'PasswdChange',
+		params: {
+			title: "Alterar Senha",
+			leftIcon: {
+				name: 'vpn-key'
 			}
 		}
 	}

@@ -73,6 +73,26 @@ export function updateAddress(token, address){
 	}
 }
 
+export function updatePasswd(token, passwd) {
+	AsyncStorage.setItem('passwd', passwd);
+
+	return (dispatch) => {
+		dispatch({type: 'SET_PASSWD_CHANGE_IS_LOADING', isLoading: true})
+
+		request('/client', 'PUT', {required_data: {passwd: passwd}}, token)
+
+		.then((response) => {
+			dispatch({type: 'SET_PASSWD_CHANGE_IS_LOADING', isLoading: false})
+			dispatch({type: 'SET_PASSWD_CHANGE_RESPONSE_FLAG', responseFlag: response.status})
+
+		})
+
+		.catch((error) => {
+			console.log(error);
+		})
+	}
+}
+
 export function registerPlayerId(token, player_id) {
 	return (dispatch) => {
 		request('/client/player_id', 'POST', {player_id: player_id}, token)

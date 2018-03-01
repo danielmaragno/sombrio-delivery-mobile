@@ -11,12 +11,13 @@ import { fetchUser, registerPlayerId } from './actions/userActions';
 
 import Login from './components/Login';
 import Register from './components/Register';
+import PasswdRecovery from './components/PasswdRecovery';
+
 import Home from './components/Home';
 import Cart from './components/Cart';
 import ExecOrder from './components/ExecOrder';
 import AddressNew from './components/AddressNew';
 import OrderExpand from './components/OrderExpand';
-import PasswdRecovery from './components/PasswdRecovery';
 
 const LoginNavigator = StackNavigator(
 	{
@@ -27,8 +28,8 @@ const LoginNavigator = StackNavigator(
 	}
 );
 
-AsyncStorage.setItem("id", "danielcoelho.esk@gmail.com");
-AsyncStorage.setItem("passwd", "h8CqLMtn");
+// AsyncStorage.setItem("id", "danielcoelho.esk@gmail.com");
+// AsyncStorage.setItem("passwd", "fbg8mMHV");
 
 
 import routesList from './routes';

@@ -1,9 +1,14 @@
 const initialState = {
-	cidade: "Sombrio",
-	bairro: "Parque das Avenidas",
-	rua: "Artur Ferreira, 207",
-	complemento: "Apto 404, bloco 4",
-	referencia: "Tijolo à vista",
+	// cidade: "Sombrio",
+	// bairro: "Parque das Avenidas",
+	// rua: "Artur Ferreira, 207",
+	// complemento: "Apto 404, bloco 4",
+	// referencia: "Tijolo à vista",
+	cidade: null,
+	bairro: null,
+	rua: null,
+	complemento: null,
+	referencia: null,
 }
 
 export default function reducer(state=initialState, action) {

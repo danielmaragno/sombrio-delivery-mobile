@@ -1,6 +1,8 @@
 const initialState = {
-	id: 'daniel',
-	passwd: 'gremiofbpa',
+	// id: 'daniel',
+	// passwd: 'gremiofbpa',
+	id: null,
+	passwd: null,
 	
 	token: null,
 	isLoading: false,

@@ -1,8 +1,12 @@
 const initialState = {
-	name: "Daniel Maragno",
-	id: "danielcoelho.esk@gmail.com",
-	passwd: "daniel",
-	passwdConf: "daniel",
+	// name: "Daniel Maragno",
+	// id: "danielcoelho.esk@gmail.com",
+	// passwd: "daniel",
+	// passwdConf: "daniel",
+	name: null,
+	id: null,
+	passwd: null,
+	passwdConf: null,
 
 	isLoading: false,
 	errorFlag: false,
