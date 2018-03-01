@@ -66,8 +66,9 @@ class Register extends React.Component {
     	this.props.dispatch({type: 'LOGIN_CLEAR_PASSWD_FIELD'});
     	// Reset flags 
     	this.props.dispatch({type: 'REGISTER_RESET_FLAGS'});
-    	// Change ID to appear in Login Page
+    	// Change ID and PASSWD to appear in Login Page
     	this.props.dispatch({type: 'CHANGE_ID', payload: {id: this.props.register.id}});
+      this.props.dispatch({type: 'CHANGE_PASSWD', payload: {passwd: this.props.register.passwd}});
     	// Go back to login page
     	this.props.navigation.goBack();
     }

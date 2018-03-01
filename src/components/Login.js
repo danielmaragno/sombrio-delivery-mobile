@@ -56,8 +56,9 @@ class Login extends React.Component {
 
   showAlertRegisterOk() {
     Alert.alert(
-      'Confirmado',
-      'Seu cadastro foi confirmado com sucesso. Por favor, faça o login.'
+      'Falta pouco!',
+      // 'Seu cadastro foi confirmado com sucesso. Por favor, faça o login.'
+      'Por favor, consulte seu e-mail e confirme seu cadastro.'
     )
   }
 
