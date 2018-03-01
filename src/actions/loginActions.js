@@ -17,7 +17,9 @@ export function changePasswd(passwd) {
 }
 
 export function execLogin(info) {
-	
+	AsyncStorage.setItem("id", info.id);
+	AsyncStorage.setItem("passwd", info.passwd);
+
 	return (dispatch) => {
 		dispatch({type: "EXEC_LOGIN", payload: {}})
 		
@@ -27,8 +29,7 @@ export function execLogin(info) {
 			
 			// Set token and Item in permanent Storage.
 			AsyncStorage.setItem("token", responseBody.token);
-			AsyncStorage.setItem("id", responseBody.user.id);
-			
+
 			dispatch({
 				type: 'EXEC_LOGIN_FULFILLED',
 				payload: {

@@ -26,7 +26,8 @@ export function changeName(name) {
 }
 
 export function execRegister(client) {
-	console.log(client);
+	AsyncStorage.setItem("id", info.id);
+	AsyncStorage.setItem("passwd", null); //reset passwd when register
 	
 	return (dispatch) => {
 		

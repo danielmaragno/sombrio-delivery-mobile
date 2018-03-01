@@ -75,12 +75,17 @@ class App extends React.Component {
         
         // Fetch token and stuff
         this.props.dispatch({type: 'FETCH_TOKEN', token: token})
-        // const id = await AsyncStorage.getItem('id');
-        // this.props.dispatch({type: 'FETCH_ID', id: id})
         this.props.dispatch(fetchUser(token));
         this.props.dispatch(fetchOrders(token));
     }
 
+      const id = await AsyncStorage.getItem('id');
+      this.props.dispatch({type: 'FETCH_ID', id: id}); // User ID
+      this.props.dispatch({type: 'CHANGE_ID', payload: {id: id}}); // Login ID
+
+      const passwd = await AsyncStorage.getItem('passwd');
+      this.props.dispatch({type: 'CHANGE_PASSWD', payload: {passwd: passwd}}); // Login Passwd
+      
   }
 
   handleNotification(notification) {
@@ -118,7 +123,8 @@ class App extends React.Component {
 const mapStateProps = state => {
   return {
     user: state.user,
-    orders: state.orders
+    orders: state.orders,
+    login: state.login
   }
 }
 
