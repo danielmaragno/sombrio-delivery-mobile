@@ -1,4 +1,4 @@
-export const base_url = "192.168.0.108:3000"
+export const base_url = "192.168.0.111:3000"
 
 export const http_url = "http://"+base_url
 
